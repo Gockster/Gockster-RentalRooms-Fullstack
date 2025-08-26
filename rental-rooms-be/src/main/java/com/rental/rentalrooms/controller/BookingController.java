@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/bookings")
+@RequestMapping("/api")
 public class BookingController {
     private final BookingService bookingService;
 
@@ -15,7 +16,7 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @PostMapping
+    @PostMapping("/bookings")
     public Booking createBooking(@RequestBody Booking booking) {
         // Add logic to check availability and save booking
         return bookingService.createBooking(booking);

@@ -19,7 +19,12 @@ public class Booking {
     private Room room;
 
     private LocalDate startDate;
+
     private LocalDate endDate;
+
+    private int adults;
+
+    private int children;
 
     private String status; // e.g., "PENDING", "CONFIRMED", "CANCELLED"
 }

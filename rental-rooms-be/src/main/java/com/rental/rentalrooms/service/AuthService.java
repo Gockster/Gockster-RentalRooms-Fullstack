@@ -47,6 +47,7 @@ public class AuthService {
         response.put("userLastName", existingUser.getUserLastName());
         response.put("phoneNumber", existingUser.getPhoneNumber());
         response.put("roles", existingUser.getRoles());
+        response.put("id", existingUser.getId());
         return ResponseEntity.ok(response);
     }
 }

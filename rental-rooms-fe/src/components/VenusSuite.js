@@ -35,6 +35,8 @@ import {
   Languages,
   ArrowUp
 } from "lucide-react";
+import Booking from './Booking';
+import { useSelector } from 'react-redux';
 
 export default function VenusSuite() {
   const { t, currentLanguage } = useLanguage();
@@ -44,6 +46,7 @@ export default function VenusSuite() {
   const [showAllImages, setShowAllImages] = useState(false);
   const [expandedFAQ, setExpandedFAQ] = useState(null);
   const initialImageCount = 6; // Show first 6 images initially for Venus Suite
+  const userId = useSelector((state) => state.user.userId);
   
   const displayedImages = showAllImages ? images : images.slice(0, initialImageCount);
   const enlargedIndex = enlargedImage ? images.indexOf(enlargedImage) : -1;
@@ -61,6 +64,7 @@ export default function VenusSuite() {
   };
 
   return (
+
     <div className="App">
       <Navbar />
       <main className="room-detail-main">
@@ -259,18 +263,13 @@ export default function VenusSuite() {
                     <span>{t.gallery?.availabilityLabels?.Available || 'Available'}</span>
                   </div>
                 </div>
-                {!enlargedImage && (
-                  <div className="room-actions">
-                    <a href="tel:+306955217820" className="btn btn-primary btn-large" style={{ textDecoration: 'none', color: 'white' }}>
-                      {t.roomDetails?.forBookingCall || 'For booking call us on'} <span role="img" aria-label="phone">📞</span> +30 6955217820
-                      <br />
-                      {t.roomDetails?.forBookingCall || 'For booking call us on'} <span role="img" aria-label="phone">📞</span> +30 6947203554
-                    </a>
-                  </div>
-                )}
               </div>
             </div>
           </div>
+        </div>
+
+          <div style={{ margin: '32px 0' }}>
+          <Booking roomId="2" userId={userId} />
         </div>
 
         {/* Property Area Section - Full Width */}
@@ -725,6 +724,8 @@ export default function VenusSuite() {
           </div>
         </div>
 
+        
+
         {/* Property Rules Section - Full Width */}
         <div style={{
           width: '100vw',
@@ -894,6 +895,7 @@ export default function VenusSuite() {
             </div>
           </div>
         </div>
+       
       </main>
       
       {/* Go to Top Button */}

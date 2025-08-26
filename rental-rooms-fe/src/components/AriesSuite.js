@@ -4,16 +4,16 @@ import { ariesSuiteImages } from "../data/RoomsImages";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/main.css";
-import { 
-  Home, 
-  Ruler, 
-  Wifi, 
-  Users, 
-  Bath, 
-  Snowflake, 
-  Building, 
-  ShowerHead, 
-  Bell, 
+import {
+  Home,
+  Ruler,
+  Wifi,
+  Users,
+  Bath,
+  Snowflake,
+  Building,
+  ShowerHead,
+  Bell,
   Sparkles,
   Calendar,
   Coffee,
@@ -35,6 +35,8 @@ import {
   Languages,
   ArrowUp
 } from "lucide-react";
+import Booking from './Booking';
+import { useSelector } from 'react-redux';
 
 export default function AriesSuite() {
   const { t, currentLanguage } = useLanguage();
@@ -43,7 +45,7 @@ export default function AriesSuite() {
   const [enlargedImage, setEnlargedImage] = useState(null);
   const [showAllImages, setShowAllImages] = useState(false);
   const initialImageCount = 4; // Show first 4 images initially
-  
+
   const displayedImages = showAllImages ? images : images.slice(0, initialImageCount);
   const enlargedIndex = enlargedImage ? images.indexOf(enlargedImage) : -1;
   const goToNext = (e) => {
@@ -58,6 +60,8 @@ export default function AriesSuite() {
       setEnlargedImage(images[(enlargedIndex - 1 + images.length) % images.length]);
     }
   };
+
+  const userId = useSelector((state) => state.user.userId);
 
   return (
     <div className="App">
@@ -80,9 +84,9 @@ export default function AriesSuite() {
               </h1>
               <p className="room-subtitle">
                 <MapPin size={16} className="map-pin" />
-                <a 
-                  href={t.roomDetails?.ariesAddressLink || "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece"} 
-                  target="_blank" 
+                <a
+                  href={t.roomDetails?.ariesAddressLink || "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece"}
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   {t.roomDetails?.ariesAddress || "Kalliarchi 9, Mykonos Chora, 846 00, Greece"}
@@ -93,7 +97,7 @@ export default function AriesSuite() {
           <div className="room-content">
             <div className="room-gallery-section">
               <div className="room-main-image">
-                <img 
+                <img
                   src={mainImage}
                   alt={currentLanguage === 'en' ? 'Aries Suite' : 'Σουίτα Αρης'}
                   className="main-room-image"
@@ -119,12 +123,12 @@ export default function AriesSuite() {
                 ))}
                 {images.length > initialImageCount && (
                   <div className="show-more-container">
-                    <button 
+                    <button
                       className="btn btn-secondary"
                       onClick={() => setShowAllImages(!showAllImages)}
                     >
-                      {showAllImages 
-                        ? (t.roomDetails?.showLess || 'Show Less') 
+                      {showAllImages
+                        ? (t.roomDetails?.showLess || 'Show Less')
                         : (t.roomDetails?.showMore ? `${t.roomDetails.showMore} (${images.length - initialImageCount} ${t.roomDetails?.more || 'more'})` : `Show More (${images.length - initialImageCount} more)`)}
                     </button>
                   </div>
@@ -246,11 +250,11 @@ export default function AriesSuite() {
               <div className="room-info">
                 <h2 className="section-title">
                   {t.roomDetails?.aboutProperty || 'About This Property'}
-                  <span className="room-license" style={{marginLeft: 12, fontSize: 13, color: '#888', fontWeight: 500, verticalAlign: 'middle'}}>
+                  <span className="room-license" style={{ marginLeft: 12, fontSize: 13, color: '#888', fontWeight: 500, verticalAlign: 'middle' }}>
                     {t.licenseLabel} 00001625992
                   </span>
                 </h2>
-                
+
                 {/* Property Description */}
                 <div className="property-description">
                   <p>
@@ -324,6 +328,10 @@ export default function AriesSuite() {
           </div>
         </div>
 
+        <div style={{ margin: '32px 0' }}>
+          <Booking roomId="1" userId={userId} />
+        </div>
+
         {/* Property Area Section - Full Width */}
         <div style={{
           width: '100vw',
@@ -390,7 +398,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Restaurants & Cafes */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -417,7 +425,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Nearby Beaches */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -452,7 +460,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Nearest Airports */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -500,8 +508,8 @@ export default function AriesSuite() {
               {t.roomDetails?.ariesSuiteAmenities || 'ARIES Suite Amenities'}
             </h2>
 
-           
-          
+
+
 
             {/* Most Popular Amenities */}
             <div style={{ marginBottom: '40px' }}>
@@ -522,9 +530,9 @@ export default function AriesSuite() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px' }}>
-              
+
               {/* Perfect for your stay */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: '#f8f9fa',
                 padding: '25px',
                 borderRadius: '12px',
@@ -563,7 +571,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Parking */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -579,7 +587,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Internet */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -595,7 +603,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Kitchen */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -622,7 +630,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Bedroom */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -639,7 +647,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Bathroom */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -678,7 +686,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Living Room */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -705,7 +713,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Room Amenities */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -751,9 +759,9 @@ export default function AriesSuite() {
 
             {/* Additional Services */}
             <div style={{ marginTop: '40px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
-              
+
               {/* Reception Services */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: '#e3f2fd',
                 padding: '25px',
                 borderRadius: '12px'
@@ -783,7 +791,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Cleaning Services */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: '#e8f5e8',
                 padding: '25px',
                 borderRadius: '12px'
@@ -799,7 +807,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Languages */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: '#fff3e0',
                 padding: '25px',
                 borderRadius: '12px'
@@ -842,9 +850,9 @@ export default function AriesSuite() {
             </h2>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px' }}>
-              
+
               {/* Check-in/Check-out */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -854,7 +862,7 @@ export default function AriesSuite() {
                   <Calendar size={24} style={{ marginRight: '10px' }} />
                   {t.roomDetails?.checkInOut || 'Check-in/Check-out'}
                 </h3>
-                
+
                 <div style={{ marginBottom: '20px' }}>
                   <h4 style={{ fontSize: '16px', fontWeight: 'bold', color: '#333', marginBottom: '8px' }}>
                     {t.roomDetails?.checkInTime || 'Check-in'}
@@ -877,10 +885,10 @@ export default function AriesSuite() {
                 </div>
               </div>
 
-            
+
 
               {/* Children and Beds */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -890,7 +898,7 @@ export default function AriesSuite() {
                   <Home size={24} style={{ marginRight: '10px' }} />
                   {t.roomDetails?.childrenBeds || 'Children and Beds'}
                 </h3>
-                
+
                 <div style={{ marginBottom: '15px' }}>
                   <h4 style={{ fontSize: '16px', fontWeight: 'bold', color: '#333', marginBottom: '8px' }}>
                     {t.roomDetails?.childrenPolicies || 'Children Policies'}
@@ -920,7 +928,7 @@ export default function AriesSuite() {
               </div>
 
               {/* Property Policies */}
-              <div style={{ 
+              <div style={{
                 backgroundColor: 'white',
                 padding: '25px',
                 borderRadius: '12px',
@@ -930,7 +938,7 @@ export default function AriesSuite() {
                   <Building size={24} style={{ marginRight: '10px' }} />
                   {t.roomDetails?.propertyPolicies || 'Property Policies'}
                 </h3>
-                
+
                 <div style={{ marginBottom: '15px' }}>
                   <h4 style={{ fontSize: '16px', fontWeight: 'bold', color: '#333', marginBottom: '8px', display: 'flex', alignItems: 'center' }}>
                     <Wind size={18} style={{ marginRight: '8px', color: '#dc3545' }} />
@@ -965,18 +973,19 @@ export default function AriesSuite() {
             </div>
           </div>
         </div>
+
       </main>
-      
+
       {/* Go to Top Button */}
       <div className="go-to-top-container">
-        <button 
+        <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="go-to-top-btn"
         >
           <ArrowUp size={20} />
         </button>
       </div>
-      
+
       <Footer />
     </div>
   );

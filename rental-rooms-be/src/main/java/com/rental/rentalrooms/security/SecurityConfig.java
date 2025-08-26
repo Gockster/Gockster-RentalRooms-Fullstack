@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .cors() // Enable CORS
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auth/**", "/api/bookings/**").permitAll()
                 .anyRequest().authenticated();
         return http.build();
     }

@@ -27,4 +27,8 @@ public class Booking {
     private int children;
 
     private String status; // e.g., "PENDING", "CONFIRMED", "CANCELLED"
+
+    public Long getRoomId() {
+        return room != null ? room.getId() : null;
+    }
 }

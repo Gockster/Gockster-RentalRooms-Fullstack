@@ -1,0 +1,3100 @@
+import React, { createContext, useContext, useState } from 'react';
+
+// Create the Language Context
+const LanguageContext = createContext();
+
+// Language texts for all components
+const translations = {
+    en: {
+    licenseLabel: "License number:",
+        // Navbar
+        navbar: {
+            brandName: "Nana's Rooms en Booking",
+            description: "Your trusted partner for finding the perfect accommodation",
+            subDescription: "Comfortable stays, affordable prices.",
+            mobile: "📱 Mobile",
+            maps: "🗺️ Maps",
+            email: "📧 nanasroomspc@gmail.com",
+            language: "🌐 EN",
+            selectLang: "Select Language",
+            callUs: "Call us",
+            viewOnMaps: "View on Google Maps"
+        },
+        // Hero section
+        hero: {
+            slides: [
+                {
+                    title: "Cycladic Accommodations",
+                    subtitle: "Authentic island living with modern comforts"
+                },
+                {
+                    title: "Cozy Apartments",
+                    subtitle: "Perfect for solo travelers and digital nomads"
+                },
+                {
+                    title: "Family-Friendly Spaces",
+                    subtitle: "Spacious accommodations for groups and families"
+                },
+                {
+                    title: "Contemporary Living",
+                    subtitle: "Modern amenities in prime locations"
+                },
+                {
+                    title: "Seaside Mykonos Retreats",
+                    subtitle: "Charming rooms just steps from the Aegean waves"
+                }
+            ],
+            description: "Discover comfortable and affordable rooms in prime locations. Your home away from home awaits with modern amenities and exceptional service.",
+            searchPlaceholder: "Where would you like to stay?",
+            searchButton: "Search Rooms",
+            exploreButton: "Explore Rooms",
+            features: [
+                "Verified Properties",
+                "Best Prices",
+                "Secure Booking"
+            ]
+        },
+        // Welcome Section
+        welcome: {
+            title: "WELCOME TO NANA'S ROOMS",
+            subtitle: "IN MYKONOS CHORA.",
+            description: "We are delighted to host you for unforgettable holidays by the sea,"
+        },
+        // Room Gallery
+        gallery: {
+            heading: "Find Your Perfect Suite",
+            searchPlaceholder: "Search rooms...",
+            priceFilter: "Price Range:",
+            priceOptions: {
+                all: "All Prices",
+                low: "Under $100",
+                mid: "$100 - $150",
+                high: "Over $150"
+            },
+            resultsCount: (count) => `${count} room${count !== 1 ? 's' : ''} found`,
+            viewButton: "View Details",
+            bookButton: "Book Now",
+            noResults: {
+                title: "No rooms found",
+                subtitle: "Try adjusting your search criteria"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Aries Suite",
+                    description: "Elegant suite inspired by the Aries constellation."
+                },
+                {
+                    id: "venus-suite",
+                    title: "Venus Suite",
+                    description: "Luxurious suite inspired by the goddess of love and beauty."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "Free Wi-Fi",
+                "Air Conditioning": "Air Conditioning",
+                "24/7 Reception": "24/7 Reception",
+                "Entire place to yourself": "Entire place to yourself",
+                "Private Bathroom": "Private Bathroom",
+                "Balcony": "Balcony",
+                "WiFi": "WiFi",
+                "Kitchen": "Kitchen",
+                "City View": "City View",
+                "Workspace": "Workspace",
+                "Room Service": "Room Service",
+                "Business Center": "Business Center",
+                "Parking": "Parking",
+                "Gym Access": "Gym Access",
+                "Swimming Pool": "Swimming Pool",
+                "Breakfast": "Breakfast"
+            },
+            availabilityLabels: {
+                "Available": "Available",
+                "Booked": "Booked",
+                "Unavailable": "Unavailable"
+            },
+            priceLabels: {
+                "night": "/night",
+                "per": "per",
+                "from": "from"
+            }
+        },
+        // Room Details
+    licenseLabel: "Lizenznummer:",
+    roomDetails: {
+            aboutProperty: "About This Property",
+            suiteSpecifications: "Suite Specifications",
+            guests: "Guests",
+            bedrooms: "Bedrooms",
+            bathrooms: "Bathrooms",
+            area: "Area",
+            amenities: "Amenities",
+            freeWifi: "Free Wi-Fi",
+            airConditioning: "Air Conditioning",
+            privateBathroom: "Private Bathroom",
+            reception24: "24/7 Reception",
+            pricingAvailability: "Pricing & Availability",
+            bookYourStay: "Book Your Stay",
+            propertyArea: "Property Area",
+            attractions: "Attractions",
+            restaurants: "Restaurants",
+            beachesTransportation: "Beaches & Transportation",
+            additionalInfo: "Additional Information",
+            paymentPolicies: "Payment & Policies",
+            contactInformation: "Contact Information",
+            upToGuests: "Up to 4 guests",
+            twoBedroomsTwo: "2 bedrooms",
+            twoBathrooms: "2 bathrooms",
+            perNight: "/night",
+            priceVaryNote: "Prices may vary depending on season and availability",
+            callDirectly: "Call us directly to book your stay or for any inquiries. We speak Greek, English, and Arabic.",
+            available24: "Available 24/7",
+            readyToBook: "Ready to Book Your Stay?",
+            experienceLuxury: "Experience the luxury and comfort of Aries Suite in the heart of Mykonos. Our dedicated team is ready to assist you 24/7 to make your stay unforgettable.",
+            callNow: "Call Now",
+            available: "Available",
+            support24: "24/7 Support",
+            location: "Location",
+            mykonosTown: "Mykonos Town",
+            bookNowCall: "📞 Book Now - Call +30 6955217820 or +30 6947203554",
+            // Common room elements
+            showMore: "Show More",
+            showLess: "Show Less",
+            more: "more",
+            forBookingCall: "For booking call us on",
+            pricing: "Pricing",
+            size: "Size",
+            roomType: "Room Type",
+            bathroom: "Bathroom",
+            built: "Built",
+            familyRoom: "Family Room",
+            privateBathroomWithShower: "1 Private Bathroom with Shower",
+            size32: "32 m² size",
+            size42: "42 m² size",
+            // Facilities section
+            facilities: "Facilities",
+            entirePlace: "Entire place to yourself",
+            freeWiFi: "Free WiFi",
+            familyRooms: "Family rooms",
+            balcony: "Balcony",
+            terrace: "Terrace",
+            shower: "Shower",
+            bathOrShower: "Bath or Shower",
+            frontDesk24: "24-hour Front Desk",
+            dailyHousekeeping: "Daily Housekeeping",
+            // Property descriptions - Aries
+            ariesDescription1: "The entire place is yours. ARIES Suite in Mykonos offers a holiday home with comfortable accommodation featuring 42 m² of space, two bedrooms and two bathrooms.",
+            ariesDescription2: "The property features 2 bathrooms with bath or shower, and free toiletries and hair dryer are provided.",
+            ariesDescription3: "The reception staff speaks Arabic, Greek and English.",
+            ariesDescription4: "Near ARIES Suite you will find popular attractions such as Mykonos Old Port, Mykonos Windmills and Little Venice. Mykonos Airport is 3 km away from the property.",
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Greece",
+            // Property descriptions - Venus
+            venusSubtitle: "Modern suite located at Petrou Drakopoulu 14, in the heart of Mykonos Town.",
+            venusDescription1: "VENUS Suite is located at Petrou Drakopoulu 14 in the center of Mykonos Town, just 300m from Agia Anna Beach. It features a terrace, free WiFi, 24-hour front desk and ATM. The property was built in 1980 and has a balcony.",
+            venusDescription2: "The air-conditioned accommodation also features 1 bathroom with shower.",
+            venusDescription3: "Near VENUS Suite you will find popular attractions such as Little Venice, Archaeological Museum of Mykonos and Mykonos Old Port. Mykonos Airport is 3 km away from the property.",
+            venusDescription4: "This location is especially popular with couples – they rated it 10.0 for a two-person trip.",
+            // Addresses with Google Maps links
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Greece",
+            ariesAddressLink: "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece",
+            venusAddress: "Petrou Drakopoulu 14, Mykonos Chora, 846 00, Greece",
+            venusAddressLink: "https://www.google.com/maps/place/Petrou+Drakopoulu+14,+Mykonos+846+00,+Greece",
+            // Property Area section
+            whatsNearby: "What's nearby",
+            restaurantsCafes: "Restaurants & Cafes",
+            nearbyBeaches: "Nearby Beaches",
+            nearestAirports: "Nearest Airports",
+            distanceDisclaimer: "Approximate shortest walking or driving distances are shown. Actual distances may differ.",
+            // Nearby Attractions
+            littleVenice: "Little Venice",
+            meletopoulouGarden: "Meletopoulou Municipal Garden",
+            mykonosWindmills: "Mykonos Windmills",
+            archaeologicalMuseum: "Archaeological Museum of Mykonos",
+            fabricaSquare: "Fabrica Square",
+            tholosTomb: "Tholos Tomb of Mykonos",
+            armenistisLighthouse: "Armenistis Lighthouse",
+            neolithicSettlement: "Neolithic Settlement of Ftelia Mykonos",
+            gyziCastle: "Gyzi Castle",
+            stadiumDistrict: "Stadium District",
+            // Restaurants & Cafes
+            cafeBarRoom101: "Cafe/Bar Room 101",
+            cafeBarBoutique: "Cafe/Bar Boutique di Vito",
+            cafeBarPaloma: "Cafe/Bar Paloma Bar",
+            // Nearby Beaches
+            agiaAnnaBeach: "Agia Anna Beach",
+            agiosCharalamposBeach: "Agios Charalampos Beach",
+            megaliAmmosBeach: "Megali Ammos Beach",
+            korfosBeach: "Korfos Beach",
+            tourlosBeach: "Tourlos Beach",
+            // Nearest Airports
+            mykonosAirport: "Mykonos Airport",
+            syrosAirport: "Syros Airport",
+            naxosAirport: "Naxos State Airport",
+            // Amenities section  
+            ariesSuiteAmenities: "ARIES Suite Amenities",
+            mostPopularAmenities: "Most Popular Amenities",
+            freeWiFiAmenity: "Free Wi-Fi",
+            reception24Amenity: "24-hour Reception",
+            perfectForStay: "Perfect for your stay",
+            parking: "Parking",
+            noParkingAvailable: "No parking available.",
+            internet: "Internet",
+            wifiAvailableInfo: "Wi-Fi is available throughout and is not charged.",
+            kitchen: "Kitchen",
+            diningTable: "Dining table",
+            electricKettle: "Electric kettle",
+            refrigerator: "Refrigerator",
+            bedroom: "Bedroom",
+            alarmClock: "Alarm clock",
+            bathroom: "Bathroom",
+            toiletPaper: "Toilet paper",
+            towels: "Towels",
+            bathOrShowerAmenity: "Bath or shower",
+            privateBathroomAmenity: "Private bathroom",
+            freeToiletries: "Free toiletries",
+            hairDryer: "Hair dryer",
+            livingRoom: "Living Room",
+            diningArea: "Dining area",
+            sofa: "Sofa",
+            seatingArea: "Seating area",
+            roomAmenities: "Room Amenities",
+            socketNearBed: "Socket near bed",
+            heatedClothesRack: "Heated clothes rack",
+            clothesDryingRack: "Clothes drying rack",
+            woodenOrParquetFlooring: "Wooden or parquet flooring",
+            tiledMarbleFlooring: "Tiled/marble flooring",
+            privateEntrance: "Private entrance",
+            heating: "Heating",
+            // Additional Services
+            receptionServices: "Reception Services",
+            invoiceProvision: "Invoice provision possible",
+            luggageStorage: "Luggage storage (extra charge)",
+            expressCheckInOut: "Express check-in/out (extra charge)",
+            reception24Hours: "24-hour reception",
+            cleaningServices: "Cleaning Services",
+            dailyHousekeepingExtra: "Daily housekeeping (extra charge)",
+            communicationLanguages: "Communication Languages",
+            arabic: "Arabic",
+            greek: "Greek",
+            english: "English",
+            // Property Rules section
+            propertyRulesPolicies: "Property Rules & Policies",
+            checkInOut: "Check-in/Check-out",
+            checkInTime: "Check-in",
+            checkOutTime: "Check-out",
+            checkInHours: "From 3:00 PM to 8:00 PM",
+            checkOutHours: "From 8:00 AM to 12:00 PM",
+            checkInAdvanceNotice: "You must inform the property in advance about your arrival time.",
+            childrenBeds: "Children and Beds",
+            childrenPolicies: "Children Policies",
+            childrenNotAllowed: "Children are not allowed.",
+            cribExtraBedPolicies: "Crib and Extra Bed Policies",
+            noCribsExtraBeds: "This property does not have cribs and extra beds available.",
+            noAgeRestrictions: "No Age Restrictions",
+            noAgeRestrictionsCheckIn: "There are no age restrictions for check-in.",
+            propertyPolicies: "Property Policies",
+            smokingPolicy: "Smoking Policy",
+            smokingNotAllowed: "Smoking is not allowed.",
+            parties: "Parties",
+            partiesNotAllowed: "Parties or events are not allowed.",
+            pets: "Pets",
+            petsNotAllowed: "Pets are not allowed.",
+            // FAQ Section
+            faqSectionTitle: "Frequently Asked Questions",
+            faqSectionSubtitle: "Find answers to common questions about our suites",
+            // Aries Suite FAQ
+            ariesFAQ: {
+                title: "Frequently Asked Questions for ARIES Suite",
+                questions: [
+                    {
+                        question: "How many guests can sleep in the ARIES Suite?",
+                        answer: "The ARIES Suite can accommodate the following number of guests:\n\n3 guests"
+                    },
+                    {
+                        question: "Is there a balcony at the ARIES Suite?",
+                        answer: "Yes, this accommodation has options with a balcony. You can learn more about this and other amenities of the ARIES Suite on this page."
+                    },
+                    {
+                        question: "Is there a terrace at the ARIES Suite?",
+                        answer: "Yes, this accommodation has options with a terrace. You can learn more about this and other amenities of the ARIES Suite on this page."
+                    },
+                    {
+                        question: "What are the check-in and check-out times at the ARIES Suite?",
+                        answer: "Check-in at the ARIES Suite is from 3:00 PM and check-out is until 12:00 PM."
+                    },
+                    {
+                        question: "How many bedrooms does the ARIES Suite have?",
+                        answer: "The ARIES Suite includes the following number of bedrooms:\n\n2 bedrooms"
+                    },
+                    {
+                        question: "How much does it cost to stay at the ARIES Suite?",
+                        answer: "Prices at the ARIES Suite may vary depending on your stay (i.e. dates you select, hotel policy etc). Enter your dates to see prices."
+                    },
+                    {
+                        question: "How far is the ARIES Suite from the center of Mykonos Town?",
+                        answer: "The ARIES Suite is 100 m away from the center of Mykonos Town."
+                    },
+                    {
+                        question: "How close to the beach is the ARIES Suite?",
+                        answer: "The nearest beach is only 200 m away from the ARIES Suite."
+                    },
+                    {
+                        question: "Is the ARIES Suite popular with families?",
+                        answer: "Yes, the ARIES Suite is popular with guests booking family stays."
+                    }
+                ]
+            },
+            // Venus Suite FAQ
+            venusFAQ: {
+                title: "Frequently Asked Questions for VENUS Suite",
+                questions: [
+                    {
+                        question: "How many guests can sleep in the VENUS Suite?",
+                        answer: "The VENUS Suite can accommodate the following number of guests:\n\n2 guests"
+                    },
+                    {
+                        question: "Is there a balcony at the VENUS Suite?",
+                        answer: "Yes, this accommodation has options with a balcony. You can learn more about this and other amenities of the VENUS Suite on this page."
+                    },
+                    {
+                        question: "What are the check-in and check-out times at the VENUS Suite?",
+                        answer: "Check-in at the VENUS Suite is from 3:00 PM and check-out is until 11:00 AM."
+                    },
+                    {
+                        question: "How many bedrooms does the VENUS Suite have?",
+                        answer: "The VENUS Suite includes the following number of bedrooms:\n\n1 bedroom"
+                    },
+                    {
+                        question: "How much does it cost to stay at the VENUS Suite?",
+                        answer: "Prices at the VENUS Suite may vary depending on your stay (i.e. dates you select, hotel policy etc). Enter your dates to see prices."
+                    },
+                    {
+                        question: "How far is the VENUS Suite from the center of Mykonos Town?",
+                        answer: "The VENUS Suite is 100 m away from the center of Mykonos Town."
+                    },
+                    {
+                        question: "How close to the beach is the VENUS Suite?",
+                        answer: "The nearest beach is only 200 m away from the VENUS Suite."
+                    },
+                    {
+                        question: "Is the VENUS Suite popular with families?",
+                        answer: "Yes, the VENUS Suite is popular with guests booking family stays."
+                    }
+                ]
+            }
+        },
+        // Footer
+        footer: {
+            brandName: "Nana's Rooms on Booking",
+            description: "Your trusted partner in finding the perfect accommodation. Comfortable stays, affordable prices.",
+            quickLinks: {
+                title: "Quick Links",
+                home: "Home",
+                rooms: "Rooms",
+                about: "About Us",
+                contact: "Contact"
+            },
+            support: {
+                title: "Support",
+                helpCenter: "Help Center",
+                safety: "Safety",
+                cancellation: "Cancellation",
+                terms: "Terms & Conditions"
+            },
+            contactInfo: {
+                title: "Contact Info",
+                email: "nanasroomspc@gmail.com",
+                phone: "+30 6955217820",
+                phone2: "+30 6947203554",
+                phone2: "+30 6947203554",
+                address: "Mykonos Chora",
+                bookingAries: "Book Aries Suite on Booking.com",
+                bookingVenus: "Book Venus Suite on Booking.com",
+                bookingAriesLink: "https://www.booking.com/hotel/gr/aries-suites.el.html?aid=356980&label=gog235jc-10CAsoXEIMYXJpZXMtc3VpdGVzSAlYA2hciAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuAKu0ejEBsACAdICJDY5NzA3NmVkLWQzZjctNDg3Mi1iZWViLWJmZGJlNzhlNTAyNtgCAeACAQ&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&",
+                bookingVenusLink: "https://www.booking.com/hotel/gr/nanas-mykonos.el.html?label=gen173nr-10CAsoXEINbmFuYXMtbXlrb25vc0gzWARoXIgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCtcXoxAbAAgHSAiQ5ZmFlMmZkYi0zY2E1LTRhYTktOGUxYi01NDNjM2IwNGUxNjXYAgHgAgE&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&"
+            },
+            copyright: "© 2025 Nana's Rooms. All rights reserved."
+        },
+        // Templates and Form Field Labels
+        templates: {
+            fieldLabels: {
+                // User/Guest Information
+                firstName: "First Name",
+                lastName: "Last Name",
+                email: "Email Address",
+                phoneNumber: "Phone Number",
+                nationality: "Nationality",
+                dateOfBirth: "Date of Birth",
+
+                // Booking Information
+                checkInDate: "Check-in Date",
+                checkOutDate: "Check-out Date",
+                numberOfGuests: "Number of Guests",
+                roomType: "Room Type",
+                specialRequests: "Special Requests",
+
+                // Address Information
+                address: "Street Address",
+                city: "City",
+                state: "State/Province",
+                zipCode: "ZIP/Postal Code",
+                country: "Country",
+
+                // Payment Information
+                cardNumber: "Card Number",
+                expiryDate: "Expiry Date",
+                cvv: "CVV",
+                cardholderName: "Cardholder Name",
+                billingAddress: "Billing Address",
+
+                // Property Management
+                contractingAuthorityId: "Property Manager ID",
+                propertyId: "Property ID",
+                roomId: "Room ID",
+                amenities: "Amenities",
+                pricePerNight: "Price per Night",
+                availability: "Availability",
+
+                // Search & Filter
+                location: "Location",
+                priceRange: "Price Range",
+                checkIn: "Check-in",
+                checkOut: "Check-out",
+                guests: "Guests",
+
+                // Contact Form
+                subject: "Subject",
+                message: "Message",
+                contactReason: "Reason for Contact",
+
+                // User Account
+                username: "Username",
+                password: "Password",
+                confirmPassword: "Confirm Password",
+                currentPassword: "Current Password",
+                newPassword: "New Password"
+            },
+            buttons: {
+                submit: "Submit",
+                cancel: "Cancel",
+                save: "Save",
+                delete: "Delete",
+                edit: "Edit",
+                search: "Search",
+                book: "Book Now",
+                reserve: "Reserve",
+                confirm: "Confirm",
+                reset: "Reset",
+                back: "Back",
+                next: "Next",
+                finish: "Finish"
+            },
+            messages: {
+                required: "This field is required",
+                invalidEmail: "Please enter a valid email address",
+                invalidPhone: "Please enter a valid phone number",
+                passwordMismatch: "Passwords do not match",
+                bookingSuccess: "Booking confirmed successfully!",
+                bookingError: "Booking failed. Please try again.",
+                updateSuccess: "Information updated successfully",
+                deleteConfirm: "Are you sure you want to delete this item?"
+            }
+        }
+    },
+    gr: {
+    licenseLabel: "Αριθμός αδείας:",
+        // Navbar
+        navbar: {
+            brandName: "Nana's Rooms su Booking",
+            description: "Il tuo partner fidato per trovare la sistemazione perfetta",
+            subDescription: "Soggiorni confortevoli, prezzi convenienti.",
+            mobile: "📱 Κινητό",
+            maps: "🗺️ Χάρτες",
+            email: "📧 nanasroomspc@gmail.com",
+            language: "🌐 ΕΛ",
+            selectLang: "Επιλογή Γλώσσας",
+            callUs: "Καλέστε μας",
+            viewOnMaps: "Προβολή στο Google Maps"
+        },
+        // Hero section
+        hero: {
+            slides: [
+                {
+                    title: "Καλωσήρθατε στο Nana's Rooms",
+                    subtitle: "Αυθεντικά καταλύματα Μυκόνου στην καρδιά της Χώρας"
+                },
+                {
+                    title: "Άνετα & Κομψά",
+                    subtitle: "Μοντέρνες ανέσεις με παραδοσιακή κυκλαδίτικη γοητεία"
+                },
+                {
+                    title: "Τέλεια Τοποθεσία",
+                    subtitle: "Λίγα βήματα από τη ζωντανή νυχτερινή ζωή της Μυκόνου"
+                },
+                {
+                    title: "Ζεστά Καταφύγια",
+                    subtitle: "Το σπίτι σας μακριά από το σπίτι στην όμορφη Μύκονο"
+                },
+                {
+                    title: "Νησιώτικη Ζωή",
+                    subtitle: "Βιώστε τη μαγεία της ελληνικής νησιώτικης φιλοξενίας"
+                },
+                {
+                    title: "Αξέχαστες Διαμονές",
+                    subtitle: "Δημιουργήστε αναμνήσεις που θα διαρκέσουν για πάντα"
+                }
+            ],
+            description: "Ανακαλύψτε άνετα και προσιτά δωμάτια σε προνομιακές τοποθεσίες. Το σπίτι μακριά από το σπίτι σας περιμένει με μοντέρνες ανέσεις και εξαιρετική εξυπηρέτηση.",
+            searchPlaceholder: "Πού θα θέλατε να μείνετε;",
+            searchButton: "Αναζήτηση Δωματίων",
+            exploreButton: "Εξερεύνηση Δωματίων",
+            features: [
+                "Επιβεβαιωμένα Ακίνητα",
+                "Καλύτερες Τιμές",
+                "Ασφαλής Κράτηση"
+            ]
+        },
+        // Welcome Section
+        welcome: {
+            title: "ΚΑΛΩΣ ΗΛΘΑΤΕ ΣΤΟ NANA'S ROOMS",
+            subtitle: "ΣΤΗΝ ΧΩΡΑ ΜΥΚΟΝΟΥ.",
+            description: "Χαρά μας να σας φιλοξενήσουμε για αξέχαστες διακοπές στο κοσμοπολίτικο νησί της Μυκόνου."
+        },
+        // Room Gallery
+        gallery: {
+            heading: "Βρείτε την Τέλεια Σουίτα σας",
+            searchPlaceholder: "Αναζήτηση δωματίων...",
+            priceFilter: "Εύρος Τιμών:",
+            priceOptions: {
+                all: "Όλες οι Τιμές",
+                low: "Κάτω από $100",
+                mid: "$100 - $150",
+                high: "Πάνω από $150"
+            },
+            resultsCount: (count) => `Βρέθηκαν ${count} δωμάτι${count !== 1 ? 'α' : 'ο'}`,
+            viewButton: "Προβολή Λεπτομερειών",
+            bookButton: "Κράτηση Τώρα",
+            noResults: {
+                title: "Δεν βρέθηκαν δωμάτια",
+                subtitle: "Δοκιμάστε να προσαρμόσετε τα κριτήρια αναζήτησης"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Aries Suite",
+                    description: "Κομψή σουίτα εμπνευσμένη από τον αστερισμό του Κριού. Αριθμός αδείας: 00001625992"
+                },
+                {
+                    id: "venus-suite",
+                    title: "Venus Suite",
+                    description: "Πολυτελής σουίτα εμπνευσμένη από τη θεά του έρωτα και της ομορφιάς."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "Δωρεάν Wi-Fi",
+                "Air Conditioning": "Κλιματισμός",
+                "24/7 Reception": "Ρεσεψιόν 24/7",
+                "Entire place to yourself": "Όλος ο χώρος για εσάς",
+                "Private Bathroom": "Ιδιωτικό Μπάνιο",
+                "Balcony": "Μπαλκόνι",
+                "WiFi": "WiFi",
+                "Kitchen": "Κουζίνα",
+                "City View": "Θέα Πόλης",
+                "Workspace": "Χώρος Εργασίας",
+                "Room Service": "Room Service",
+                "Business Center": "Κέντρο Επιχειρήσεων",
+                "Parking": "Πάρκινγκ",
+                "Gym Access": "Πρόσβαση Γυμναστηρίου",
+                "Swimming Pool": "Πισίνα",
+                "Breakfast": "Πρωινό"
+            },
+            availabilityLabels: {
+                "Available": "Διαθέσιμο",
+                "Booked": "Κλειστό",
+                "Unavailable": "Μη Διαθέσιμο"
+            },
+            priceLabels: {
+                "night": "/βράδυ",
+                "per": "ανά",
+                "from": "από"
+            }
+        },
+        // Room Details
+    licenseLabel: "Numéro de licence:",
+    roomDetails: {
+            aboutProperty: "Σχετικά με το Ακίνητο",
+            propertyArea: "Περιοχή Καταλύματος",
+            suiteSpecifications: "Προδιαγραφές Σουίτας",
+            guests: "Επισκέπτες",
+            bedrooms: "Υπνοδωμάτια",
+            bathrooms: "Μπάνια",
+            area: "Εμβαδόν",
+            amenities: "Παροχές",
+            freeWifi: "Δωρεάν Wi-Fi",
+            airConditioning: "Κλιματισμός",
+            privateBathroom: "Ιδιωτικό Μπάνιο",
+            reception24: "Ρεσεψιόν 24/7",
+            bookNowCall: "📞 Κάντε Κράτηση Τώρα - Καλέστε +30 6955217820 ή +30 6947203554",
+            // Common room elements
+            showMore: "Περισσότερα",
+            showLess: "Λιγότερα",
+            more: "ακόμη",
+            forBookingCall: "Για κράτηση καλέστε μας στο",
+            pricing: "Τιμές",
+            size: "Μέγεθος",
+            roomType: "Τύπος Δωματίου",
+            bathroom: "Μπάνιο",
+            built: "Χτίστηκε",
+            familyRoom: "Οικογενειακό Δωμάτιο",
+            privateBathroomWithShower: "1 Ιδιωτικό Μπάνιο με Ντους",
+            size32: "32 τ.μ. μέγεθος",
+            size42: "42 τ.μ. μέγεθος",
+            // Facilities section
+            facilities: "Παροχές",
+            entirePlace: "Όλο το κατάλυμα στη διάθεσή σας",
+            freeWiFi: "Δωρεάν Wi-Fi",
+            familyRooms: "Οικογενειακά δωμάτια",
+            balcony: "Μπαλκόνι",
+            terrace: "Βεράντα",
+            shower: "Ντους",
+            bathOrShower: "Μπανιέρα ή ντους",
+            frontDesk24: "24ωρη Ρεσεψιόν",
+            dailyHousekeeping: "Καθημερινή υπηρεσία καθαριότητας",
+            // Property descriptions - Aries
+            ariesDescription1: "Στην καρδιά του προορισμού Μύκονος Χώρα και σε μικρή απόσταση από τα σημεία ενδιαφέροντος Παραλία Αγία Άννα και Αρχαιολογικό Μουσείο Μυκόνου, το ARIES Suite προσφέρει δωρεάν WiFi, κλιματισμό και οικιακές παροχές, όπως ψυγείο και ηλεκτρικό βραστήρα. Αυτό το κατάλυμα προσφέρει πρόσβαση σε βεράντα.",
+            ariesDescription2: "Το κατάλυμα έχει επίσης 2 μπάνια με μπανιέρα ή ντους, ενώ διατίθενται δωρεάν προϊόντα μπάνιου και στεγνωτήρας μαλλιών.",
+            ariesDescription3: "Οι γλώσσες που μιλάει το προσωπικό στη ρεσεψιόν είναι Αραβικά, Ελληνικά και Αγγλικά.",
+            ariesDescription4: "Κοντά στο ARIES Suite θα βρείτε δημοφιλή σημεία ενδιαφέροντος, όπως Παλιό Λιμάνι Μυκόνου, Ανεμόμυλοι Μυκόνου και Μικρή Βενετία. Το αεροδρόμιο Αεροδρόμιο Μυκόνου είναι 3 χλμ μακριά από το κατάλυμα.",
+            ariesAddress: "Καλλιάρχη 9, Μύκονος Χώρα, 846 00, Ελλάδα",
+            // Property descriptions - Venus
+            venusSubtitle: "Μοντέρνα σουίτα που βρίσκεται στην Πετρου Δρακοπούλου 14, στο κέντρο της Μυκόνου Χώρα.",
+            venusDescription1: "Το VENUS Suite βρίσκεται στην Πετρου Δρακοπούλου 14 στο κέντρο της Μυκόνου Χώρα και απέχει μόλις 300μ από την Παραλία Αγία Άννα. Διαθέτει βεράντα, δωρεάν WiFi, 24ωρη ρεσεψιόν και ΑΤΜ. Το κατάλυμα χτίστηκε το 1980 και έχει μπαλκόνι.",
+            venusDescription2: "Το κλιματιζόμενο κατάλυμα διαθέτει επίσης 1 μπάνιο με ντους.",
+            venusDescription3: "Κοντά στο VENUS Suite θα βρείτε δημοφιλή σημεία ενδιαφέροντος, όπως Μικρή Βενετία, Αρχαιολογικό Μουσείο Μυκόνου και Παλιό Λιμάνι Μυκόνου. Το αεροδρόμιο Αεροδρόμιο Μυκόνου είναι 3 χλμ μακριά από το κατάλυμα.",
+            venusDescription4: "Η τοποθεσία αρέσει ιδιαίτερα σε ζευγάρια – τη βαθμολόγησαν με 10,0 για ταξίδι δύο ατόμων.",
+            // Addresses with Google Maps links
+            ariesAddress: "Καλλιάρχη 9, Μύκονος Χώρα, 846 00, Ελλάδα",
+            ariesAddressLink: "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece",
+            venusAddress: "Πέτρου Δρακοπούλου 14, Μύκονος Χώρα, 846 00, Ελλάδα",
+            venusAddressLink: "https://www.google.com/maps/place/Petrou+Drakopoulu+14,+Mykonos+846+00,+Greece",
+            // Property Area section
+            whatsNearby: "Τι υπάρχει κοντά",
+            restaurantsCafes: "Εστιατόρια & καφέ",
+            nearbyBeaches: "Κοντινές παραλίες",
+            nearestAirports: "Κοντινότερα αεροδρόμια",
+            distanceDisclaimer: "Εμφανίζονται οι κατά προσέγγιση συντομότερες αποστάσεις με τα πόδια ή το αυτοκίνητο. Οι πραγματικές αποστάσεις ενδέχεται να διαφέρουν.",
+            // Nearby Attractions
+            littleVenice: "Μικρή Βενετία",
+            meletopoulouGarden: "Δημοτικός Κήπος του Μελετόπουλου",
+            mykonosWindmills: "Ανεμόμυλοι Μυκόνου",
+            archaeologicalMuseum: "Αρχαιολογικό Μουσείο Μυκόνου",
+            fabricaSquare: "Πλατεία Φάμπρικα",
+            tholosTomb: "Θολωτοσ Ταφοσ Μυκονου",
+            armenistisLighthouse: "Φάρος Αρμενιστής",
+            neolithicSettlement: "Νεολιθικοσ Οικισμοσ Φτελιασ Μυκονου",
+            gyziCastle: "Καστρο Γκυζη",
+            stadiumDistrict: "Συνοικια Του Σταδιου",
+            // Restaurants & Cafes
+            cafeBarRoom101: "Καφέ/μπαρRoom 101",
+            cafeBarBoutique: "Καφέ/μπαρBoutique di Vito",
+            cafeBarPaloma: "Καφέ/μπαρPaloma Bar",
+            // Nearby Beaches
+            agiaAnnaBeach: "Παραλία Αγία Άννα",
+            agiosCharalamposBeach: "Παραλία Άγιος Χαράλαμπος",
+            megaliAmmosBeach: "Παραλία Μεγάλη Άμμος",
+            korfosBeach: "Παραλία Κόρφος",
+            tourlosBeach: "Παραλία Τούρλος",
+            // Nearest Airports
+            mykonosAirport: "Αεροδρόμιο Μυκόνου",
+            syrosAirport: "Αεροδρόμιο Σύρου",
+            naxosAirport: "Κρατικός Αερολιμένας Νάξου",
+            // Amenities section
+            ariesSuiteAmenities: "Παροχές του ARIES Suite",
+            venusSuiteAmenities: "Παροχές του VENUS Suite",
+            mostPopularAmenities: "Οι πιο δημοφιλείς παροχές",
+            freeWiFiAmenity: "Δωρεάν Wi-Fi",
+            reception24Amenity: "24ωρη Ρεσεψιόν",
+            perfectForStay: "Ιδανικά για τη διαμονή σας",
+            parking: "Χώρος στάθμευσης",
+            noParkingAvailable: "Δεν υπάρχει χώρος στάθμευσης.",
+            internet: "Ίντερνετ",
+            wifiAvailableInfo: "Wi-Fi διατίθεται σε όλους τους χώρους και δεν χρεώνεται.",
+            kitchen: "Κουζίνα",
+            diningTable: "Τραπέζι φαγητού",
+            electricKettle: "Ηλεκτρικός βραστήρας",
+            refrigerator: "Ψυγείο",
+            bedroom: "Υπνοδωμάτιο",
+            alarmClock: "Ξυπνητήρι",
+            bathroom: "Μπάνιο",
+            toiletPaper: "Χαρτί υγείας",
+            towels: "Πετσέτες",
+            bathOrShowerAmenity: "Μπανιέρα ή ντους",
+            privateBathroomAmenity: "Ιδιωτικό μπάνιο",
+            freeToiletries: "Δωρεάν προϊόντα περιποίησης",
+            hairDryer: "Στεγνωτήρας μαλλιών",
+            livingRoom: "Σαλόνι",
+            diningArea: "Τραπεζαρία",
+            sofa: "Καναπές",
+            seatingArea: "Καθιστικό",
+            roomAmenities: "Παροχές Δωματίου",
+            socketNearBed: "Πρίζα κοντά στο κρεβάτι",
+            heatedClothesRack: "Θερμαινόμενη κρεμάστρα για ρούχα",
+            clothesDryingRack: "Απλώστρα ρούχων",
+            woodenOrParquetFlooring: "Ξύλινο ή παρκέ δάπεδο",
+            tiledMarbleFlooring: "Δάπεδο με πλακάκια / μάρμαρο",
+            privateEntrance: "Ιδιωτική είσοδος",
+            heating: "Θέρμανση",
+            // Additional Services
+            receptionServices: "Υπηρεσίες ρεσεψιόν",
+            invoiceProvision: "Δυνατότητα παροχής τιμολογίου",
+            luggageStorage: "Χώρος φύλαξης αποσκευών (επιπλέον χρέωση)",
+            expressCheckInOut: "Γρήγορο check in/check out (επιπλέον χρέωση)",
+            reception24Hours: "24ωρη Ρεσεψιόν",
+            cleaningServices: "Υπηρεσίες καθαριότητας",
+            dailyHousekeepingExtra: "Καθημερινή υπηρεσία καθαριότητας (επιπλέον χρέωση)",
+            communicationLanguages: "Γλώσσες επικοινωνίας",
+            arabic: "Αραβικά",
+            greek: "Ελληνικά",
+            english: "Αγγλικά",
+            // Property Rules section
+            propertyRulesPolicies: "Κανονισμοί καταλύματος",
+            checkInOut: "Check-in/Check-out",
+            checkInTime: "Check-in",
+            checkOutTime: "Check-out",
+            checkInHours: "Από 3:00 μ.μ. έως 8:00 μ.μ.",
+            checkOutHours: "Από 8:00 π.μ. έως 12:00 μ.μ.",
+            checkInAdvanceNotice: "Θα πρέπει να ενημερώσετε το κατάλυμα εκ των προτέρων τι ώρα θα φτάσετε.",
+            childrenBeds: "Παιδιά και κρεβάτια",
+            childrenPolicies: "Πολιτικές σχετικά με τα παιδιά",
+            childrenNotAllowed: "Δεν επιτρέπονται τα παιδιά.",
+            cribExtraBedPolicies: "Πολιτικές για βρεφικές κούνιες και επιπλέον κρεβάτια",
+            noCribsExtraBeds: "Αυτό το κατάλυμα δεν διαθέτει βρεφικές κούνιες και επιπλέον κρεβάτια.",
+            noAgeRestrictions: "Χωρίς περιορισμό ηλικίας",
+            noAgeRestrictionsCheckIn: "Δεν υπάρχουν περιορισμοί ηλικίας για το check-in",
+            propertyPolicies: "Πολιτικές καταλύματος",
+            smokingPolicy: "Πολιτική καπνίσματος",
+            smokingNotAllowed: "Δεν επιτρέπεται το κάπνισμα.",
+            parties: "Πάρτι",
+            partiesNotAllowed: "Δεν επιτρέπονται τα πάρτι ή/και οι εκδηλώσεις",
+            pets: "Κατοικίδια ζώα",
+            petsNotAllowed: "Τα κατοικίδια δεν επιτρέπονται.",
+            // FAQ Section
+            faqSectionTitle: "Συχνές Ερωτήσεις",
+            faqSectionSubtitle: "Βρείτε απαντήσεις σε συχνές ερωτήσεις για τα διαμερίσματά μας",
+            // Aries Suite FAQ
+            ariesFAQ: {
+                title: "Συχνές ερωτήσεις για το ARIES Suite",
+                questions: [
+                    {
+                        question: "Πόσοι επισκέπτες μπορούν να κοιμηθούν στο ARIES Suite;",
+                        answer: "Το ARIES Suite μπορεί να φιλοξενήσει τον ακόλουθο αριθμό επισκεπτών:\n\n3 επισκέπτες"
+                    },
+                    {
+                        question: "Υπάρχει μπαλκόνι στο ARIES Suite;",
+                        answer: "Ναι, σε αυτό το κατάλυμα υπάρχουν επιλογές που προσφέρουν μπαλκόνι. Μπορείτε να μάθετε περισσότερα για αυτό και για τις άλλες παροχές του ARIES Suite σε αυτή τη σελίδα."
+                    },
+                    {
+                        question: "Υπάρχει βεράντα στο ARIES Suite;",
+                        answer: "Ναι, σε αυτό το κατάλυμα υπάρχουν επιλογές που προσφέρουν βεράντα. Μπορείτε να μάθετε περισσότερα για αυτό και για τις άλλες παροχές του ARIES Suite σε αυτή τη σελίδα."
+                    },
+                    {
+                        question: "Ποιες είναι οι ώρες check-in και check-out στο ARIES Suite;",
+                        answer: "Το check-in στο ARIES Suite πραγματοποιείται από τις 15:00 και το check-out μέχρι τις 12:00."
+                    },
+                    {
+                        question: "Πόσα υπνοδωμάτια έχει το ARIES Suite;",
+                        answer: "Το ARIES Suite περιλαμβάνει τον παρακάτω αριθμό υπνοδωματίων:\n\n2 υπνοδωμάτια"
+                    },
+                    {
+                        question: "Πόσο κοστίζει η διαμονή στο ARIES Suite;",
+                        answer: "Οι τιμές στο ARIES Suite μπορεί να διαφέρουν ανάλογα με τη διαμονή σας (δηλ. τις ημερομηνίες που επιλέγετε, την πολιτική του ξενοδοχείου κλπ). Εισαγάγετε τις ημερομηνίες σας για να δείτε τιμές."
+                    },
+                    {
+                        question: "Πόσο μακριά βρίσκεται το ARIES Suite από το κέντρο της πόλης Μύκονος Χώρα;",
+                        answer: "Το ARIES Suite απέχει 100 μ. από το κέντρο της πόλης Μύκονος Χώρα."
+                    },
+                    {
+                        question: "Πόσο κοντά στην παραλία βρίσκεται το ARIES Suite;",
+                        answer: "Η πλησιέστερη παραλία απέχει μόνο 200 μ. από το ARIES Suite."
+                    },
+                    {
+                        question: "Είναι το ARIES Suite δημοφιλές στις οικογένειες;",
+                        answer: "Ναι, το ARIES Suite είναι δημοφιλές στους επισκέπτες που κάνουν κράτηση για οικογενειακές διαμονές."
+                    }
+                ]
+            },
+            // Venus Suite FAQ
+            venusFAQ: {
+                title: "Συχνές ερωτήσεις για το VENUS Suite",
+                questions: [
+                    {
+                        question: "Πόσοι επισκέπτες μπορούν να κοιμηθούν στο VENUS Suite;",
+                        answer: "Το VENUS Suite μπορεί να φιλοξενήσει τον ακόλουθο αριθμό επισκεπτών:\n\n2 επισκέπτες"
+                    },
+                    {
+                        question: "Υπάρχει μπαλκόνι στο VENUS Suite;",
+                        answer: "Ναι, σε αυτό το κατάλυμα υπάρχουν επιλογές που προσφέρουν μπαλκόνι. Μπορείτε να μάθετε περισσότερα για αυτό και για τις άλλες παροχές του VENUS Suite σε αυτή τη σελίδα."
+                    },
+                    {
+                        question: "Ποιες είναι οι ώρες check-in και check-out στο VENUS Suite;",
+                        answer: "Το check-in στο VENUS Suite πραγματοποιείται από τις 15:00 και το check-out μέχρι τις 11:00."
+                    },
+                    {
+                        question: "Πόσα υπνοδωμάτια έχει το VENUS Suite;",
+                        answer: "Το VENUS Suite περιλαμβάνει τον παρακάτω αριθμό υπνοδωματίων:\n\n1 υπνοδωμάτιο"
+                    },
+                    {
+                        question: "Πόσο κοστίζει η διαμονή στο VENUS Suite;",
+                        answer: "Οι τιμές στο VENUS Suite μπορεί να διαφέρουν ανάλογα με τη διαμονή σας (δηλ. τις ημερομηνίες που επιλέγετε, την πολιτική του ξενοδοχείου κλπ). Εισαγάγετε τις ημερομηνίες σας για να δείτε τιμές."
+                    },
+                    {
+                        question: "Πόσο μακριά βρίσκεται το VENUS Suite από το κέντρο της πόλης Μύκονος Χώρα;",
+                        answer: "Το VENUS Suite απέχει 100 μ. από το κέντρο της πόλης Μύκονος Χώρα."
+                    },
+                    {
+                        question: "Πόσο κοντά στην παραλία βρίσκεται το VENUS Suite;",
+                        answer: "Η πλησιέστερη παραλία απέχει μόνο 200 μ. από το VENUS Suite."
+                    },
+                    {
+                        question: "Είναι το VENUS Suite δημοφιλές στις οικογένειες;",
+                        answer: "Ναι, το VENUS Suite είναι δημοφιλές στους επισκέπτες που κάνουν κράτηση για οικογενειακές διαμονές."
+                    }
+                ]
+            }
+        },
+        // Footer
+        footer: {
+            brandName: "Nana's Rooms στη Booking",
+            description: "Ihr vertrauenswürdiger Partner für die perfekte Unterkunft",
+            subDescription: "Komfortable Aufenthalte, günstige Preise.",
+            description: "Ο αξιόπιστος συνεργάτης σας για την εύρεση του τέλειου καταλύματος",
+            subDescription: "Άνετες διαμονές, προσιτές τιμές.",
+            quickLinks: {
+                title: "Γρήγοροι Σύνδεσμοι",
+                home: "Αρχική",
+                rooms: "Δωμάτια",
+                about: "Σχετικά με εμάς",
+                contact: "Επικοινωνία"
+            },
+            support: {
+                title: "Υποστήριξη",
+                helpCenter: "Κέντρο Βοήθειας",
+                safety: "Ασφάλεια",
+                cancellation: "Ακύρωση",
+                terms: "Όροι & Προϋποθέσεις"
+            },
+            contactInfo: {
+                title: "Στοιχεία Επικοινωνίας",
+                email: "nanasroomspc@gmail.com",
+                phone: "+30 6955217820",
+                phone2: "+30 6947203554",
+                address: "Μύκονος Χώρα",
+                bookingAries: "Κράτηση Aries Suite στο Booking.com",
+                bookingVenus: "Κράτηση Venus Suite στο Booking.com",
+                bookingAriesLink: "https://www.booking.com/hotel/gr/aries-suites.el.html?aid=356980&label=gog235jc-10CAsoXEIMYXJpZXMtc3VpdGVzSAlYA2hciAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuAKu0ejEBsACAdICJDY5NzA3NmVkLWQzZjctNDg3Mi1iZWViLWJmZGJlNzhlNTAyNtgCAeACAQ&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&",
+                bookingVenusLink: "https://www.booking.com/hotel/gr/nanas-mykonos.el.html?label=gen173nr-10CAsoXEINbmFuYXMtbXlrb25vc0gzWARoXIgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCtcXoxAbAAgHSAiQ5ZmFlMmZkYi0zY2E1LTRhYTktOGUxYi01NDNjM2IwNGUxNjXYAgHgAgE&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&"
+            },
+            copyright: "© 2025 Nana's Rooms. Όλα τα δικαιώματα διατηρούνται."
+        },
+        // Templates and Form Field Labels
+        templates: {
+            fieldLabels: {
+                // User/Guest Information
+                firstName: "Όνομα",
+                lastName: "Επώνυμο",
+                email: "Διεύθυνση Email",
+                phoneNumber: "Αριθμός Τηλεφώνου",
+                nationality: "Εθνικότητα",
+                dateOfBirth: "Ημερομηνία Γέννησης",
+
+                // Booking Information
+                checkInDate: "Ημερομηνία Άφιξης",
+                checkOutDate: "Ημερομηνία Αναχώρησης",
+                numberOfGuests: "Αριθμός Επισκεπτών",
+                roomType: "Τύπος Δωματίου",
+                specialRequests: "Ειδικές Απαιτήσεις",
+
+                // Address Information
+                address: "Διεύθυνση",
+                city: "Πόλη",
+                state: "Περιφέρεια/Νομός",
+                zipCode: "Ταχυδρομικός Κώδικας",
+                country: "Χώρα",
+
+                // Payment Information
+                cardNumber: "Αριθμός Κάρτας",
+                expiryDate: "Ημερομηνία Λήξης",
+                cvv: "CVV",
+                cardholderName: "Όνομα Κατόχου Κάρτας",
+                billingAddress: "Διεύθυνση Χρέωσης",
+
+                // Property Management
+                contractingAuthorityId: "ID Διαχειριστή Ακινήτου",
+                propertyId: "ID Ακινήτου",
+                roomId: "ID Δωματίου",
+                amenities: "Παροχές",
+                pricePerNight: "Τιμή ανά Διανυκτέρευση",
+                availability: "Διαθεσιμότητα",
+
+                // Search & Filter
+                location: "Τοποθεσία",
+                priceRange: "Εύρος Τιμών",
+                checkIn: "Άφιξη",
+                checkOut: "Αναχώρηση",
+                guests: "Επισκέπτες",
+
+                // Contact Form
+                subject: "Θέμα",
+                message: "Μήνυμα",
+                contactReason: "Λόγος Επικοινωνίας",
+
+                // User Account
+                username: "Όνομα Χρήστη",
+                password: "Κωδικός Πρόσβασης",
+                confirmPassword: "Επιβεβαίωση Κωδικού",
+                currentPassword: "Τρέχων Κωδικός",
+                newPassword: "Νέος Κωδικός"
+            },
+            buttons: {
+                submit: "Υποβολή",
+                cancel: "Ακύρωση",
+                save: "Αποθήκευση",
+                delete: "Διαγραφή",
+                edit: "Επεξεργασία",
+                search: "Αναζήτηση",
+                book: "Κράτηση Τώρα",
+                reserve: "Κράτηση",
+                confirm: "Επιβεβαίωση",
+                reset: "Επαναφορά",
+                back: "Πίσω",
+                next: "Επόμενο",
+                finish: "Ολοκλήρωση"
+            },
+            messages: {
+                required: "Αυτό το πεδίο είναι υποχρεωτικό",
+                invalidEmail: "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email",
+                invalidPhone: "Παρακαλώ εισάγετε έναν έγκυρο αριθμό τηλεφώνου",
+                passwordMismatch: "Οι κωδικοί δεν ταιριάζουν",
+                bookingSuccess: "Η κράτηση επιβεβαιώθηκε με επιτυχία!",
+                bookingError: "Η κράτηση απέτυχε. Παρακαλώ δοκιμάστε ξανά.",
+                updateSuccess: "Οι πληροφορίες ενημερώθηκαν με επιτυχία",
+                deleteConfirm: "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το στοιχείο;"
+            }
+        }
+    },
+    it: {
+    licenseLabel: "Numero di licenza:",
+        // Navbar
+        navbar: {
+            brandName: "Nana's Rooms en Booking",
+            description: "Su socio de confianza para encontrar el alojamiento perfecto",
+            subDescription: "Estancias cómodas, precios asequibles.",
+            mobile: "📱 Cellulare",
+            maps: "🗺️ Mappe",
+            email: "📧 nanasroomspc@gmail.com",
+            language: "🌐 IT",
+            selectLang: "Seleziona Lingua",
+            callUs: "Chiamaci",
+            viewOnMaps: "Visualizza su Google Maps"
+        },
+        // Hero section
+        hero: {
+            slides: [
+                {
+                    title: "Benvenuti al Nana's Rooms",
+                    subtitle: "Autentiche sistemazioni di Mykonos nel cuore di Chora"
+                },
+                {
+                    title: "Confortevole & Elegante",
+                    subtitle: "Servizi moderni con il fascino tradizionale delle Cicladi"
+                },
+                {
+                    title: "Posizione Perfetta",
+                    subtitle: "A pochi passi dalla vivace vita notturna di Mykonos"
+                },
+                {
+                    title: "Rifugi Accoglienti",
+                    subtitle: "La tua casa lontano da casa nella bella Mykonos"
+                },
+                {
+                    title: "Vita Isolana",
+                    subtitle: "Vivi la magia dell'ospitalità delle isole greche"
+                },
+                {
+                    title: "Soggiorni Indimenticabili",
+                    subtitle: "Crea ricordi che dureranno per sempre"
+                }
+            ],
+            description: "Scopri camere confortevoli e convenienti in posizioni privilegiate. La tua casa lontano da casa ti aspetta con servizi moderni e servizio eccezionale.",
+            searchPlaceholder: "Dove vorresti soggiornare?",
+            searchButton: "Cerca Camere",
+            exploreButton: "Esplora Camere",
+            features: [
+                "Proprietà Verificate",
+                "Migliori Prezzi",
+                "Prenotazione Sicura"
+            ]
+        },
+        // Welcome Section
+        welcome: {
+            title: "BENVENUTI AL NANA'S ROOMS",
+            subtitle: "A MYKONOS CHORA.",
+            description: "Siamo lieti di ospitarvi per vacanze indimenticabili sul cosmopolita isola di Mykonos."
+        },
+        // Room Gallery
+        gallery: {
+            heading: "Trova la Tua Suite Perfetta",
+            searchPlaceholder: "Cerca camere...",
+            priceFilter: "Fascia di Prezzo:",
+            priceOptions: {
+                all: "Tutti i Prezzi",
+                low: "Sotto €100",
+                mid: "€100 - €150",
+                high: "Sopra €150"
+            },
+            resultsCount: (count) => `${count} camera${count !== 1 ? 'e' : ''} trovata${count !== 1 ? 'e' : ''}`,
+            viewButton: "Visualizza Dettagli",
+            bookButton: "Prenota Ora",
+            noResults: {
+                title: "Nessuna camera trovata",
+                subtitle: "Prova a modificare i criteri di ricerca"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Aries Suite",
+                    description: "Suite elegante ispirata alla costellazione dell'Ariete."
+                },
+                {
+                    id: "venus-suite",
+                    title: "Venus Suite",
+                    description: "Suite lussuosa ispirata alla dea dell'amore e della bellezza."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "Wi-Fi Gratuito",
+                "Air Conditioning": "Aria Condizionata",
+                "24/7 Reception": "Reception 24/7",
+                "Entire place to yourself": "Tutto per te",
+                "Private Bathroom": "Bagno Privato",
+                "Balcony": "Balcone",
+                "WiFi": "WiFi",
+                "Kitchen": "Cucina",
+                "City View": "Vista Città",
+                "Workspace": "Spazio di Lavoro",
+                "Room Service": "Servizio in Camera",
+                "Business Center": "Centro Affari",
+                "Parking": "Parcheggio",
+                "Gym Access": "Accesso Palestra",
+                "Swimming Pool": "Piscina",
+                "Breakfast": "Colazione"
+            },
+            availabilityLabels: {
+                "Available": "Disponibile",
+                "Booked": "Prenotato",
+                "Unavailable": "Non Disponibile"
+            },
+            priceLabels: {
+                "night": "/notte",
+                "per": "per",
+                "from": "da"
+            }
+        },
+        // Room Details
+        roomDetails: {
+            aboutProperty: "Informazioni sulla Proprietà",
+            suiteSpecifications: "Specifiche Suite",
+            guests: "Ospiti",
+            bedrooms: "Camere da Letto",
+            bathrooms: "Bagni",
+            area: "Area",
+            amenities: "Servizi",
+            freeWifi: "Wi-Fi Gratuito",
+            airConditioning: "Aria Condizionata",
+            privateBathroom: "Bagno Privato",
+            reception24: "Reception 24/7",
+            facilities: "Strutture",
+            entirePlace: "Intero posto per te",
+            size42: "42 m² di dimensione",
+            size32: "32 m² di dimensione",
+            dailyHousekeeping: "Servizio di pulizia giornaliero",
+            terrace: "Terrazza",
+            balcony: "Balcone",
+            bathOrShower: "Vasca o doccia",
+            frontDesk24: "Reception 24 ore",
+            freeWiFi: "Wi-Fi Gratuito",
+            familyRooms: "Camere familiari",
+            shower: "Doccia",
+            pricingAvailability: "Prezzi e Disponibilità",
+            bookYourStay: "Prenota il Tuo Soggiorno",
+            propertyArea: "Area della Proprietà",
+            attractions: "Attrazioni",
+            restaurants: "Ristoranti",
+            bookNowCall: "📞 Prenota Ora - Chiama +30 6955217820 o +30 6947203554",
+            // Common room elements
+            showMore: "Mostra di più",
+            showLess: "Mostra di meno",
+            more: "altro",
+            forBookingCall: "Per le prenotazioni chiamateci al",
+            pricing: "Prezzi",
+            size: "Dimensioni",
+            roomType: "Tipo di Camera",
+            bathroom: "Bagno",
+            built: "Costruito",
+            familyRoom: "Camera Familiare",
+            privateBathroomWithShower: "1 Bagno Privato con Doccia",
+            // Property descriptions - Aries
+            ariesDescription1: "L'intero posto è tuo. ARIES Suite a Mykonos offre una casa vacanze con alloggi confortevoli caratterizzati da 42 m² di spazio, due camere da letto e due bagni.",
+            ariesDescription2: "La proprietà dispone di 2 bagni con vasca o doccia, e sono forniti asciugacapelli e articoli da toilette gratuiti.",
+            ariesDescription3: "Il personale della reception parla arabo, greco e inglese.",
+            ariesDescription4: "Vicino ad ARIES Suite troverete attrazioni popolari come il Porto Vecchio di Mykonos, i Mulini a Vento di Mykonos e Piccola Venezia. L'aeroporto di Mykonos si trova a 3 km dalla proprietà.",
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Grecia",
+            // Property descriptions - Venus
+            venusSubtitle: "Suite moderna situata in Petrou Drakopoulu 14, nel cuore di Mykonos Town.",
+            venusDescription1: "VENUS Suite si trova in Petrou Drakopoulu 14 nel centro di Mykonos Town, a soli 300m dalla spiaggia di Agia Anna. Dispone di terrazza, WiFi gratuito, reception 24 ore e ATM. La proprietà è stata costruita nel 1980 e ha un balcone.",
+            venusDescription2: "L'alloggio climatizzato dispone anche di 1 bagno con doccia.",
+            venusDescription3: "Vicino a VENUS Suite troverete attrazioni popolari come Piccola Venezia, Museo Archeologico di Mykonos e Porto Vecchio di Mykonos. L'aeroporto di Mykonos si trova a 3 km dalla proprietà.",
+            venusDescription4: "Questa location è particolarmente apprezzata dalle coppie – l'hanno valutata 10,0 per un viaggio di due persone.",
+            // Addresses with Google Maps links
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Grecia",
+            ariesAddressLink: "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece",
+            venusAddress: "Petrou Drakopoulu 14, Mykonos Chora, 846 00, Grecia",
+            venusAddressLink: "https://www.google.com/maps/place/Petrou+Drakopoulu+14,+Mykonos+846+00,+Greece",
+            // Property Area section
+            whatsNearby: "Cosa c'è nelle vicinanze",
+            restaurantsCafes: "Ristoranti e Caffè",
+            nearbyBeaches: "Spiagge Vicine",
+            nearestAirports: "Aeroporti più Vicini",
+            distanceDisclaimer: "Sono mostrate le distanze più brevi approssimative a piedi o in auto. Le distanze reali potrebbero differire.",
+            // Nearby Attractions
+            littleVenice: "Piccola Venezia",
+            meletopoulouGarden: "Giardino Comunale di Meletopoulos",
+            mykonosWindmills: "Mulini a Vento di Mykonos",
+            archaeologicalMuseum: "Museo Archeologico di Mykonos",
+            fabricaSquare: "Piazza Fabrica",
+            tholosTomb: "Tomba Tholos di Mykonos",
+            armenistisLighthouse: "Faro di Armenistis",
+            neolithicSettlement: "Insediamento Neolitico di Ftelia Mykonos",
+            gyziCastle: "Castello Gyzi",
+            stadiumDistrict: "Quartiere dello Stadio",
+            // Restaurants & Cafes
+            cafeBarRoom101: "Caffè/Bar Room 101",
+            cafeBarBoutique: "Caffè/Bar Boutique di Vito",
+            cafeBarPaloma: "Caffè/Bar Paloma Bar",
+            // Nearby Beaches
+            agiaAnnaBeach: "Spiaggia di Agia Anna",
+            agiosCharalamposBeach: "Spiaggia di Agios Charalampos",
+            megaliAmmosBeach: "Spiaggia di Megali Ammos",
+            korfosBeach: "Spiaggia di Korfos",
+            tourlosBeach: "Spiaggia di Tourlos",
+            // Nearest Airports
+            mykonosAirport: "Aeroporto di Mykonos",
+            syrosAirport: "Aeroporto di Syros",
+            naxosAirport: "Aeroporto Statale di Naxos",
+            // Amenities section
+            ariesSuiteAmenities: "Servizi ARIES Suite",
+            mostPopularAmenities: "Servizi Più Popolari",
+            freeWiFiAmenity: "Wi-Fi Gratuito",
+            reception24Amenity: "Reception 24 ore",
+            perfectForStay: "Perfetto per il tuo soggiorno",
+            parking: "Parcheggio",
+            noParkingAvailable: "Nessun parcheggio disponibile.",
+            internet: "Internet",
+            wifiAvailableInfo: "Il Wi-Fi è disponibile in tutta la struttura e non viene addebitato.",
+            kitchen: "Cucina",
+            diningTable: "Tavolo da pranzo",
+            electricKettle: "Bollitore elettrico",
+            refrigerator: "Frigorifero",
+            bedroom: "Camera da letto",
+            alarmClock: "Sveglia",
+            bathroom: "Bagno",
+            toiletPaper: "Carta igienica",
+            towels: "Asciugamani",
+            bathOrShowerAmenity: "Vasca o doccia",
+            privateBathroomAmenity: "Bagno privato",
+            freeToiletries: "Articoli da toilette gratuiti",
+            hairDryer: "Asciugacapelli",
+            livingRoom: "Soggiorno",
+            diningArea: "Zona pranzo",
+            sofa: "Divano",
+            seatingArea: "Area salotto",
+            roomAmenities: "Servizi della Camera",
+            socketNearBed: "Presa vicino al letto",
+            heatedClothesRack: "Stendibiancheria riscaldato",
+            clothesDryingRack: "Stendibiancheria",
+            woodenOrParquetFlooring: "Pavimento in legno o parquet",
+            tiledMarbleFlooring: "Pavimento piastrellato/marmo",
+            privateEntrance: "Ingresso privato",
+            heating: "Riscaldamento",
+            // Additional Services
+            receptionServices: "Servizi Reception",
+            invoiceProvision: "Possibilità di fattura",
+            luggageStorage: "Deposito bagagli (costo aggiuntivo)",
+            expressCheckInOut: "Check-in/out express (costo aggiuntivo)",
+            reception24Hours: "Reception 24 ore",
+            cleaningServices: "Servizi di Pulizia",
+            dailyHousekeepingExtra: "Servizio di pulizia giornaliero (costo aggiuntivo)",
+            communicationLanguages: "Lingue di Comunicazione",
+            arabic: "Arabo",
+            greek: "Greco",
+            english: "Inglese",
+            // FAQ Section
+            faqSectionTitle: "Domande Frequenti",
+            faqSectionSubtitle: "Trova risposte alle domande comuni sulle nostre suite",
+            // Aries Suite FAQ
+            ariesFAQ: {
+                title: "Domande Frequenti per ARIES Suite",
+                questions: [
+                    {
+                        question: "Quanti ospiti possono dormire nella Suite ARIES?",
+                        answer: "La Suite ARIES può ospitare il seguente numero di ospiti:\n\n3 ospiti"
+                    },
+                    {
+                        question: "C'è un balcone nella Suite ARIES?",
+                        answer: "Sì, questa sistemazione offre opzioni con balcone. Puoi trovare maggiori informazioni su questo e altri servizi della Suite ARIES in questa pagina."
+                    },
+                    {
+                        question: "C'è una terrazza nella Suite ARIES?",
+                        answer: "Sì, questa sistemazione offre opzioni con terrazza. Puoi trovare maggiori informazioni su questo e altri servizi della Suite ARIES in questa pagina."
+                    },
+                    {
+                        question: "Quali sono gli orari di check-in e check-out per la Suite ARIES?",
+                        answer: "Il check-in per la Suite ARIES è dalle 15:00 e il check-out è fino alle 12:00."
+                    },
+                    {
+                        question: "Quante camere da letto ci sono nella Suite ARIES?",
+                        answer: "La Suite ARIES include il seguente numero di camere da letto:\n\n2 camere da letto"
+                    },
+                    {
+                        question: "Quanto costa soggiornare nella Suite ARIES?",
+                        answer: "I prezzi della Suite ARIES possono variare in base al soggiorno (cioè alle date selezionate, alla politica dell'hotel, ecc.). Inserisci le tue date per vedere i prezzi."
+                    },
+                    {
+                        question: "A che distanza si trova la Suite ARIES dal centro di Mykonos?",
+                        answer: "La Suite ARIES si trova a 100 m dal centro di Mykonos."
+                    },
+                    {
+                        question: "Quanto è vicina la Suite ARIES alla spiaggia?",
+                        answer: "La spiaggia più vicina si trova a soli 200 m dalla Suite ARIES."
+                    },
+                    {
+                        question: "La Suite ARIES è popolare tra le famiglie?",
+                        answer: "Sì, la Suite ARIES è popolare tra gli ospiti che prenotano soggiorni in famiglia."
+                    }
+                ]
+            },
+            // Venus Suite FAQ
+            venusFAQ: {
+                title: "Domande Frequenti per VENUS Suite",
+                questions: [
+                    {
+                        question: "Quanti ospiti possono dormire nella Suite VENUS?",
+                        answer: "La Suite VENUS può ospitare il seguente numero di ospiti:\n\n2 ospiti"
+                    },
+                    {
+                        question: "C'è un balcone nella Suite VENUS?",
+                        answer: "Sì, questa sistemazione offre opzioni con balcone. Puoi trovare maggiori informazioni su questo e altri servizi della Suite VENUS in questa pagina."
+                    },
+                    {
+                        question: "Quali sono gli orari di check-in e check-out per la Suite VENUS?",
+                        answer: "Il check-in per la Suite VENUS è dalle 15:00 e il check-out è fino alle 11:00."
+                    },
+                    {
+                        question: "Quante camere da letto ci sono nella Suite VENUS?",
+                        answer: "La Suite VENUS include il seguente numero di camere da letto:\n\n1 camera da letto"
+                    },
+                    {
+                        question: "Quanto costa soggiornare nella Suite VENUS?",
+                        answer: "I prezzi della Suite VENUS possono variare in base al soggiorno (cioè alle date selezionate, alla politica dell'hotel, ecc.). Inserisci le tue date per vedere i prezzi."
+                    },
+                    {
+                        question: "A che distanza si trova la Suite VENUS dal centro di Mykonos?",
+                        answer: "La Suite VENUS si trova a 100 m dal centro di Mykonos."
+                    },
+                    {
+                        question: "Quanto è vicina la Suite VENUS alla spiaggia?",
+                        answer: "La spiaggia più vicina si trova a soli 200 m dalla Suite VENUS."
+                    },
+                    {
+                        question: "La Suite VENUS è popolare tra le famiglie?",
+                        answer: "Sì, la Suite VENUS è popolare tra gli ospiti che prenotano soggiorni in famiglia."
+                    }
+                ]
+            },
+            // Property Rules section
+            propertyRulesPolicies: "Regole e Politiche della Struttura",
+            checkInOut: "Check-in/Check-out",
+            checkInTime: "Check-in",
+            checkOutTime: "Check-out",
+            checkInHours: "Dalle 15:00 alle 20:00",
+            checkOutHours: "Dalle 08:00 alle 12:00",
+            checkInAdvanceNotice: "Devi informare la struttura in anticipo del tuo orario di arrivo.",
+            childrenBeds: "Bambini e Letti",
+            childrenPolicies: "Politiche per i Bambini",
+            childrenNotAllowed: "I bambini non sono ammessi.",
+            cribExtraBedPolicies: "Politiche per Culle e Letti Extra",
+            noCribsExtraBeds: "Questa struttura non dispone di culle e letti extra disponibili.",
+            noAgeRestrictions: "Nessuna Restrizione di Età",
+            noAgeRestrictionsCheckIn: "Non ci sono restrizioni di età per il check-in.",
+            propertyPolicies: "Politiche della Struttura",
+            smokingPolicy: "Politica sul Fumo",
+            smokingNotAllowed: "Non è permesso fumare.",
+            parties: "Feste",
+            partiesNotAllowed: "Non sono ammesse feste o eventi.",
+            pets: "Animali Domestici",
+            petsNotAllowed: "Gli animali domestici non sono ammessi."
+        },
+        // Footer
+        footer: {
+            brandName: "Camere di Nana su prenotazione",
+            description: "Il tuo partner fidato per trovare la sistemazione perfetta",
+            subDescription: "Soggiorni confortevoli, prezzi convenienti.",
+            quickLinks: {
+                title: "Link Rapidi",
+                home: "Home",
+                rooms: "Camere",
+                about: "Chi Siamo",
+                contact: "Contatti"
+            },
+            support: {
+                title: "Supporto",
+                helpCenter: "Centro Assistenza",
+                safety: "Sicurezza",
+                cancellation: "Cancellazione",
+                terms: "Termini e Condizioni"
+            },
+            contactInfo: {
+                title: "Informazioni di Contatto",
+                email: "nanasroomspc@gmail.com",
+                phone: "+30 6955217820",
+                phone2: "+30 6947203554",
+                address: "Mykonos Chora",
+                bookingAries: "Prenota Aries Suite su Booking.com",
+                bookingVenus: "Prenota Venus Suite su Booking.com",
+                bookingAriesLink: "https://www.booking.com/hotel/gr/aries-suites.el.html?aid=356980&label=gog235jc-10CAsoXEIMYXJpZXMtc3VpdGVzSAlYA2hciAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuAKu0ejEBsACAdICJDY5NzA3NmVkLWQzZjctNDg3Mi1iZWViLWJmZGJlNzhlNTAyNtgCAeACAQ&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&",
+                bookingVenusLink: "https://www.booking.com/hotel/gr/nanas-mykonos.el.html?label=gen173nr-10CAsoXEINbmFuYXMtbXlrb25vc0gzWARoXIgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCtcXoxAbAAgHSAiQ5ZmFlMmZkYi0zY2E1LTRhYTktOGUxYi01NDNjM2IwNGUxNjXYAgHgAgE&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&"
+            },
+            copyright: "© 2025 Nana's Rooms. Tutti i diritti riservati."
+        }
+    },
+    de: {
+    licenseLabel: "Lizenznummer:",
+    // Navbar
+    navbar: {
+            brandName: "Nana's Rooms sur Booking",
+            description: "Votre partenaire de confiance pour trouver l'hébergement parfait",
+            subDescription: "Séjours confortables, prix abordables.",
+            mobile: "📱 Handy",
+            maps: "🗺️ Karten",
+            email: "📧 nanasroomspc@gmail.com",
+            language: "🌐 DE",
+            selectLang: "Sprache Wählen",
+            callUs: "Rufen Sie uns an",
+            viewOnMaps: "Auf Google Maps anzeigen"
+        },
+        // Hero section
+        hero: {
+            slides: [
+                {
+                    title: "Willkommen bei Nana's Rooms",
+                    subtitle: "Authentische Mykonos-Unterkünfte im Herzen von Chora"
+                },
+                {
+                    title: "Komfortabel & Stilvoll",
+                    subtitle: "Moderne Annehmlichkeiten mit traditionellem kykladischen Charme"
+                },
+                {
+                    title: "Perfekte Lage",
+                    subtitle: "Nur wenige Schritte von Mykonos' lebhaftem Nachtleben entfernt"
+                },
+                {
+                    title: "Gemütliche Rückzugsorte",
+                    subtitle: "Ihr Zuhause fern der Heimat im schönen Mykonos"
+                },
+                {
+                    title: "Inselleben",
+                    subtitle: "Erleben Sie die Magie der griechischen Inselhospitalität"
+                },
+                {
+                    title: "Unvergessliche Aufenthalte",
+                    subtitle: "Schaffen Sie Erinnerungen, die ein Leben lang halten"
+                }
+            ],
+            description: "Entdecken Sie komfortable und erschwingliche Zimmer in erstklassigen Lagen. Ihr Zuhause fern der Heimat wartet mit modernen Annehmlichkeiten und außergewöhnlichem Service.",
+            searchPlaceholder: "Wo möchten Sie übernachten?",
+            searchButton: "Zimmer Suchen",
+            exploreButton: "Zimmer Erkunden",
+            features: [
+                "Verifizierte Immobilien",
+                "Beste Preise",
+                "Sichere Buchung"
+            ]
+        },
+        // Welcome Section
+        welcome: {
+            title: "WILLKOMMEN BEI NANA'S ROOMS",
+            subtitle: "IN MYKONOS CHORA.",
+            description: "Wir freuen uns, Sie für unvergessliche Ferien auf der kosmopolitischen Insel Mykonos zu beherbergen."
+        },
+        // Room Gallery
+        gallery: {
+            heading: "Finden Sie Ihre Perfekte Suite",
+            searchPlaceholder: "Zimmer suchen...",
+            priceFilter: "Preisbereich:",
+            priceOptions: {
+                all: "Alle Preise",
+                low: "Unter €100",
+                mid: "€100 - €150",
+                high: "Über €150"
+            },
+            resultsCount: (count) => `${count} Zimmer gefunden`,
+            viewButton: "Details Anzeigen",
+            bookButton: "Jetzt Buchen",
+            noResults: {
+                title: "Keine Zimmer gefunden",
+                subtitle: "Versuchen Sie, Ihre Suchkriterien anzupassen"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Aries Suite",
+                    description: "Elegante Suite inspiriert vom Sternbild Widder."
+                },
+                {
+                    id: "venus-suite",
+                    title: "Venus Suite",
+                    description: "Luxuriöse Suite inspiriert von der Göttin der Liebe und Schönheit."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "Kostenloses WLAN",
+                "Air Conditioning": "Klimaanlage",
+                "24/7 Reception": "24-Stunden-Rezeption",
+                "Entire place to yourself": "Ganzer Ort für dich",
+                "Private Bathroom": "Privates Badezimmer",
+                "Balcony": "Balkon",
+                "WiFi": "WLAN",
+                "Kitchen": "Küche",
+                "City View": "Stadtblick",
+                "Workspace": "Arbeitsplatz",
+                "Room Service": "Zimmerservice",
+                "Business Center": "Business Center",
+                "Parking": "Parkplatz",
+                "Gym Access": "Fitnessstudio Zugang",
+                "Swimming Pool": "Schwimmbad",
+                "Breakfast": "Frühstück"
+            },
+            availabilityLabels: {
+                "Available": "Verfügbar",
+                "Booked": "Gebucht",
+                "Unavailable": "Nicht Verfügbar"
+            },
+            priceLabels: {
+                "night": "/Nacht",
+                "per": "pro",
+                "from": "ab"
+            }
+        },
+        // Room Details
+        roomDetails: {
+            aboutProperty: "Über Diese Unterkunft",
+            suiteSpecifications: "Suite-Spezifikationen",
+            guests: "Gäste",
+            bedrooms: "Schlafzimmer",
+            bathrooms: "Badezimmer",
+            area: "Fläche",
+            amenities: "Ausstattung",
+            freeWifi: "Kostenloses WLAN",
+            airConditioning: "Klimaanlage",
+            privateBathroom: "Privates Badezimmer",
+            reception24: "24-Stunden-Rezeption",
+            facilities: "Einrichtungen",
+            entirePlace: "Ganzer Ort für sich",
+            size42: "42 m² Größe",
+            size32: "32 m² Größe",
+            dailyHousekeeping: "Tägliche Zimmerreinigung",
+            terrace: "Terrasse",
+            balcony: "Balkon",
+            bathOrShower: "Badewanne oder Dusche",
+            frontDesk24: "24-Stunden-Rezeption",
+            freeWiFi: "Kostenloses WLAN",
+            familyRooms: "Familienzimmer",
+            shower: "Dusche",
+            pricingAvailability: "Preise & Verfügbarkeit",
+            bookYourStay: "Buchen Sie Ihren Aufenthalt",
+            propertyArea: "Lage der Unterkunft",
+            attractions: "Sehenswürdigkeiten",
+            restaurants: "Restaurants",
+            bookNowCall: "📞 Jetzt Buchen - Rufen Sie +30 6955217820 oder +30 6947203554 an",
+            // Common room elements
+            showMore: "Mehr anzeigen",
+            showLess: "Weniger anzeigen",
+            more: "mehr",
+            forBookingCall: "Für Buchungen rufen Sie uns an unter",
+            pricing: "Preise",
+            size: "Größe",
+            roomType: "Zimmertyp",
+            bathroom: "Badezimmer",
+            built: "Gebaut",
+            familyRoom: "Familienzimmer",
+            privateBathroomWithShower: "1 Privates Badezimmer mit Dusche",
+            // Property descriptions - Aries
+            ariesDescription1: "Der ganze Ort gehört Ihnen. ARIES Suite in Mykonos bietet ein Ferienhaus mit komfortabler Unterkunft mit 42 m² Fläche, zwei Schlafzimmern und zwei Badezimmern.",
+            ariesDescription2: "Die Unterkunft verfügt über 2 Badezimmer mit Badewanne oder Dusche, und kostenlose Toilettenartikel und Haartrockner sind vorhanden.",
+            ariesDescription3: "Das Rezeptionspersonal spricht Arabisch, Griechisch und Englisch.",
+            ariesDescription4: "In der Nähe der ARIES Suite finden Sie beliebte Sehenswürdigkeiten wie den Alten Hafen von Mykonos, die Windmühlen von Mykonos und Little Venice. Der Flughafen Mykonos ist 3 km von der Unterkunft entfernt.",
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Griechenland",
+            // Property descriptions - Venus
+            venusSubtitle: "Moderne Suite in der Petrou Drakopoulu 14, im Herzen von Mykonos Town.",
+            venusDescription1: "VENUS Suite befindet sich in der Petrou Drakopoulu 14 im Zentrum von Mykonos Town, nur 300m vom Strand Agia Anna entfernt. Es verfügt über eine Terrasse, kostenloses WiFi, 24-Stunden-Rezeption und Geldautomat. Die Unterkunft wurde 1980 erbaut und hat einen Balkon.",
+            venusDescription2: "Die klimatisierte Unterkunft verfügt auch über 1 Badezimmer mit Dusche.",
+            venusDescription3: "In der Nähe der VENUS Suite finden Sie beliebte Sehenswürdigkeiten wie Little Venice, Archäologisches Museum von Mykonos und Alter Hafen von Mykonos. Der Flughafen Mykonos ist 3 km von der Unterkunft entfernt.",
+            venusDescription4: "Dieser Ort ist besonders bei Paaren beliebt – sie bewerteten ihn mit 10,0 für eine Reise zu zweit.",
+            // Addresses with Google Maps links
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Griechenland",
+            ariesAddressLink: "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece",
+            venusAddress: "Petrou Drakopoulu 14, Mykonos Chora, 846 00, Griechenland",
+            venusAddressLink: "https://www.google.com/maps/place/Petrou+Drakopoulu+14,+Mykonos+846+00,+Greece",
+            // Property Area section
+            whatsNearby: "Was ist in der Nähe",
+            restaurantsCafes: "Restaurants & Cafés",
+            nearbyBeaches: "Nahegelegene Strände",
+            nearestAirports: "Nächstgelegene Flughäfen",
+            distanceDisclaimer: "Es werden ungefähre kürzeste Geh- oder Fahrstrecken angezeigt. Tatsächliche Entfernungen können abweichen.",
+            // Nearby Attractions
+            littleVenice: "Little Venice",
+            meletopoulouGarden: "Meletopoulos Stadtgarten",
+            mykonosWindmills: "Mykonos Windmühlen",
+            archaeologicalMuseum: "Archäologisches Museum von Mykonos",
+            fabricaSquare: "Fabrica-Platz",
+            tholosTomb: "Tholos-Grab von Mykonos",
+            armenistisLighthouse: "Armenistis-Leuchtturm",
+            neolithicSettlement: "Neolithische Siedlung von Ftelia Mykonos",
+            gyziCastle: "Gyzi-Schloss",
+            stadiumDistrict: "Stadion-Viertel",
+            // Restaurants & Cafes
+            cafeBarRoom101: "Café/Bar Room 101",
+            cafeBarBoutique: "Café/Bar Boutique di Vito",
+            cafeBarPaloma: "Café/Bar Paloma Bar",
+            // Nearby Beaches
+            agiaAnnaBeach: "Agia Anna Strand",
+            agiosCharalamposBeach: "Agios Charalampos Strand",
+            megaliAmmosBeach: "Megali Ammos Strand",
+            korfosBeach: "Korfos Strand",
+            tourlosBeach: "Tourlos Strand",
+            // Nearest Airports
+            mykonosAirport: "Flughafen Mykonos",
+            syrosAirport: "Flughafen Syros",
+            naxosAirport: "Staatsflughafen Naxos",
+            // Amenities section
+            ariesSuiteAmenities: "ARIES Suite Ausstattung",
+            mostPopularAmenities: "Beliebteste Ausstattungen",
+            freeWiFiAmenity: "Kostenloses WLAN",
+            reception24Amenity: "24-Stunden-Rezeption",
+            perfectForStay: "Perfekt für Ihren Aufenthalt",
+            parking: "Parkplatz",
+            noParkingAvailable: "Kein Parkplatz verfügbar.",
+            internet: "Internet",
+            wifiAvailableInfo: "WLAN ist im gesamten Gebäude verfügbar und wird nicht berechnet.",
+            kitchen: "Küche",
+            diningTable: "Esstisch",
+            electricKettle: "Elektrischer Wasserkocher",
+            refrigerator: "Kühlschrank",
+            bedroom: "Schlafzimmer",
+            alarmClock: "Wecker",
+            bathroom: "Badezimmer",
+            toiletPaper: "Toilettenpapier",
+            towels: "Handtücher",
+            bathOrShowerAmenity: "Badewanne oder Dusche",
+            privateBathroomAmenity: "Privates Badezimmer",
+            freeToiletries: "Kostenlose Toilettenartikel",
+            hairDryer: "Haartrockner",
+            livingRoom: "Wohnzimmer",
+            diningArea: "Essbereich",
+            sofa: "Sofa",
+            seatingArea: "Sitzbereich",
+            roomAmenities: "Zimmerausstattung",
+            socketNearBed: "Steckdose in Bettnähe",
+            heatedClothesRack: "Beheizte Kleiderstange",
+            clothesDryingRack: "Wäschetrockner",
+            woodenOrParquetFlooring: "Holz- oder Parkettboden",
+            tiledMarbleFlooring: "Fliesen-/Marmorboden",
+            privateEntrance: "Privater Eingang",
+            heating: "Heizung",
+            // Additional Services
+            receptionServices: "Rezeptionsservice",
+            invoiceProvision: "Rechnungsstellung möglich",
+            luggageStorage: "Gepäckaufbewahrung (gegen Aufpreis)",
+            expressCheckInOut: "Express Check-in/out (gegen Aufpreis)",
+            reception24Hours: "24-Stunden-Rezeption",
+            cleaningServices: "Reinigungsservice",
+            dailyHousekeepingExtra: "Tägliche Zimmerreinigung (gegen Aufpreis)",
+            communicationLanguages: "Kommunikationssprachen",
+            arabic: "Arabisch",
+            greek: "Griechisch",
+            english: "Englisch",
+            // FAQ Section
+            faqSectionTitle: "Häufig Gestellte Fragen",
+            faqSectionSubtitle: "Finden Sie Antworten auf häufige Fragen zu unseren Suiten",
+            // Aries Suite FAQ
+            ariesFAQ: {
+                title: "Häufig Gestellte Fragen zur ARIES Suite",
+                questions: [
+                    {
+                        question: "Wie viele Gäste können in der ARIES Suite schlafen?",
+                        answer: "Die ARIES Suite bietet Platz für folgende Anzahl von Gästen:\n\n3 Gäste"
+                    },
+                    {
+                        question: "Gibt es einen Balkon in der ARIES Suite?",
+                        answer: "Ja, diese Unterkunft bietet Optionen mit Balkon. Weitere Informationen hierzu und zu anderen Annehmlichkeiten der ARIES Suite finden Sie auf dieser Seite."
+                    },
+                    {
+                        question: "Gibt es eine Terrasse in der ARIES Suite?",
+                        answer: "Ja, diese Unterkunft bietet Optionen mit Terrasse. Weitere Informationen hierzu und zu anderen Annehmlichkeiten der ARIES Suite finden Sie auf dieser Seite."
+                    },
+                    {
+                        question: "Wie sind die Check-in- und Check-out-Zeiten in der ARIES Suite?",
+                        answer: "Der Check-in in der ARIES Suite ist ab 15:00 Uhr und der Check-out bis 12:00 Uhr möglich."
+                    },
+                    {
+                        question: "Wie viele Schlafzimmer hat die ARIES Suite?",
+                        answer: "Die ARIES Suite verfügt über folgende Anzahl an Schlafzimmern:\n\n2 Schlafzimmer"
+                    },
+                    {
+                        question: "Wie viel kostet ein Aufenthalt in der ARIES Suite?",
+                        answer: "Die Preise in der ARIES Suite können je nach Aufenthalt variieren (z. B. je nach ausgewählten Daten, Hotelrichtlinie usw.). Geben Sie Ihre Daten ein, um die Preise zu sehen."
+                    },
+                    {
+                        question: "Wie weit ist die ARIES Suite vom Zentrum von Mykonos entfernt?",
+                        answer: "Die ARIES Suite liegt 100 m vom Zentrum von Mykonos entfernt."
+                    },
+                    {
+                        question: "Wie nah ist die ARIES Suite am Strand?",
+                        answer: "Der nächste Strand ist nur 200 m von der ARIES Suite entfernt."
+                    },
+                    {
+                        question: "Ist die ARIES Suite bei Familien beliebt?",
+                        answer: "Ja, die ARIES Suite ist bei Gästen, die Familienaufenthalte buchen, beliebt."
+                    }
+                ]
+            },
+            // Venus Suite FAQ
+            venusFAQ: {
+                title: "Häufig Gestellte Fragen zur VENUS Suite",
+                questions: [
+                    {
+                        question: "Wie viele Gäste können in der VENUS Suite schlafen?",
+                        answer: "Die VENUS Suite bietet Platz für folgende Anzahl von Gästen:\n\n2 Gäste"
+                    },
+                    {
+                        question: "Gibt es einen Balkon in der VENUS Suite?",
+                        answer: "Ja, diese Unterkunft bietet Optionen mit Balkon. Weitere Informationen hierzu und zu anderen Annehmlichkeiten der VENUS Suite finden Sie auf dieser Seite."
+                    },
+                    {
+                        question: "Wie sind die Check-in- und Check-out-Zeiten in der VENUS Suite?",
+                        answer: "Der Check-in in der VENUS Suite ist ab 15:00 Uhr und der Check-out bis 11:00 Uhr möglich."
+                    },
+                    {
+                        question: "Wie viele Schlafzimmer hat die VENUS Suite?",
+                        answer: "Die VENUS Suite verfügt über folgende Anzahl an Schlafzimmern:\n\n1 Schlafzimmer"
+                    },
+                    {
+                        question: "Wie viel kostet ein Aufenthalt in der VENUS Suite?",
+                        answer: "Die Preise in der VENUS Suite können je nach Aufenthalt variieren (z. B. je nach ausgewählten Daten, Hotelrichtlinie usw.). Geben Sie Ihre Daten ein, um die Preise zu sehen."
+                    },
+                    {
+                        question: "Wie weit ist die VENUS Suite vom Zentrum von Mykonos entfernt?",
+                        answer: "Die VENUS Suite liegt 100 m vom Zentrum von Mykonos entfernt."
+                    },
+                    {
+                        question: "Wie nah ist die VENUS Suite am Strand?",
+                        answer: "Der nächste Strand ist nur 200 m von der VENUS Suite entfernt."
+                    },
+                    {
+                        question: "Ist die VENUS Suite bei Familien beliebt?",
+                        answer: "Ja, die VENUS Suite ist bei Gästen, die Familienaufenthalte buchen, beliebt."
+                    }
+                ]
+            },
+            // Property Rules section
+            propertyRulesPolicies: "Hausordnung & Richtlinien",
+            checkInOut: "Check-in/Check-out",
+            checkInTime: "Check-in",
+            checkOutTime: "Check-out",
+            checkInHours: "Von 15:00 bis 20:00 Uhr",
+            checkOutHours: "Von 08:00 bis 12:00 Uhr",
+            checkInAdvanceNotice: "Sie müssen die Unterkunft im Voraus über Ihre Ankunftszeit informieren.",
+            childrenBeds: "Kinder und Betten",
+            childrenPolicies: "Kinderrichtlinien",
+            childrenNotAllowed: "Kinder sind nicht erlaubt.",
+            cribExtraBedPolicies: "Richtlinien für Kinderbetten und Zusatzbetten",
+            noCribsExtraBeds: "Diese Unterkunft verfügt nicht über Kinderbetten und Zusatzbetten.",
+            noAgeRestrictions: "Keine Altersbeschränkungen",
+            noAgeRestrictionsCheckIn: "Es gibt keine Altersbeschränkungen für den Check-in.",
+            propertyPolicies: "Unterkunftsrichtlinien",
+            smokingPolicy: "Raucherpolitik",
+            smokingNotAllowed: "Rauchen ist nicht gestattet.",
+            parties: "Partys",
+            partiesNotAllowed: "Partys oder Veranstaltungen sind nicht gestattet.",
+            pets: "Haustiere",
+            petsNotAllowed: "Haustiere sind nicht erlaubt."
+        },
+        // Footer
+        footer: {
+            brandName: "Nana's Rooms sur Booking",
+            description: "Ihr vertrauensvoller Partner bei der Suche nach der perfekten Unterkunft",
+            subDescription: "Komfortable Aufenthalte, erschwingliche Preise.",
+            quickLinks: {
+                title: "Schnelle Links",
+                home: "Startseite",
+                rooms: "Zimmer",
+                about: "Über Uns",
+                contact: "Kontakt"
+            },
+            support: {
+                title: "Support",
+                helpCenter: "Hilfe-Center",
+                safety: "Sicherheit",
+                cancellation: "Stornierung",
+                terms: "Allgemeine Geschäftsbedingungen"
+            },
+            contactInfo: {
+                title: "Kontakt Information",
+                email: "nanasroomspc@gmail.com",
+                phone: "+30 6955217820",
+                phone2: "+30 6947203554",
+                address: "Mykonos Chora",
+                bookingAries: "Aries Suite auf Booking.com buchen",
+                bookingVenus: "Venus Suite auf Booking.com buchen",
+                bookingAriesLink: "https://www.booking.com/hotel/gr/aries-suites.el.html?aid=356980&label=gog235jc-10CAsoXEIMYXJpZXMtc3VpdGVzSAlYA2hciAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuAKu0ejEBsACAdICJDY5NzA3NmVkLWQzZjctNDg3Mi1iZWViLWJmZGJlNzhlNTAyNtgCAeACAQ&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&",
+                bookingVenusLink: "https://www.booking.com/hotel/gr/nanas-mykonos.el.html?label=gen173nr-10CAsoXEINbmFuYXMtbXlrb25vc0gzWARoXIgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCtcXoxAbAAgHSAiQ5ZmFlMmZkYi0zY2E1LTRhYTktOGUxYi01NDNjM2IwNGUxNjXYAgHgAgE&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&"
+            },
+            copyright: "© 2025 Nana's Rooms. Alle Rechte vorbehalten."
+        }
+    },
+    es: {
+    licenseLabel: "Número de licencia:",
+        // Navbar
+        navbar: {
+            brandName: "Nana's Rooms on Booking",
+            mobile: "📱 Móvil",
+            maps: "🗺️ Mapas",
+            email: "📧 atdimitriadou@gmail.com",
+            language: "🌐 ES",
+            selectLang: "Seleccionar Idioma",
+            callUs: "Llámanos",
+            viewOnMaps: "Ver en Google Maps"
+        },
+        // Hero section
+        hero: {
+            slides: [
+                {
+                    title: "Bienvenidos a Nana's Rooms",
+                    subtitle: "Auténticos alojamientos de Mykonos en el corazón de Chora"
+                },
+                {
+                    title: "Cómodo y Elegante",
+                    subtitle: "Comodidades modernas con encanto tradicional de las Cícladas"
+                },
+                {
+                    title: "Ubicación Perfecta",
+                    subtitle: "A pocos pasos de la vibrante vida nocturna de Mykonos"
+                },
+                {
+                    title: "Refugios Acogedores",
+                    subtitle: "Tu hogar lejos del hogar en la hermosa Mykonos"
+                },
+                {
+                    title: "Vida Isleña",
+                    subtitle: "Experimenta la magia de la hospitalidad de las islas griegas"
+                },
+                {
+                    title: "Estancias Inolvidables",
+                    subtitle: "Crea recuerdos que durarán para siempre"
+                }
+            ],
+            description: "Descubre habitaciones cómodas y asequibles en ubicaciones privilegiadas. Tu hogar lejos del hogar te espera con comodidades modernas y servicio excepcional.",
+            searchPlaceholder: "¿Dónde te gustaría quedarte?",
+            searchButton: "Buscar Habitaciones",
+            exploreButton: "Explorar Habitaciones",
+            features: [
+                "Propiedades Verificadas",
+                "Mejores Precios",
+                "Reserva Segura"
+            ]
+        },
+        // Welcome Section
+        welcome: {
+            title: "BIENVENIDOS A NANA'S ROOMS",
+            subtitle: "EN MYKONOS CHORA.",
+            description: "Nos complace alojarles para unas vacaciones inolvidables en la cosmopolita isla de Mykonos."
+        },
+        // Room Gallery
+        gallery: {
+            heading: "Encuentra Tu Suite Perfecta",
+            searchPlaceholder: "Buscar habitaciones...",
+            priceFilter: "Rango de Precios:",
+            priceOptions: {
+                all: "Todos los Precios",
+                low: "Menos de €100",
+                mid: "€100 - €150",
+                high: "Más de €150"
+            },
+            resultsCount: (count) => `${count} habitación${count !== 1 ? 'es' : ''} encontrada${count !== 1 ? 's' : ''}`,
+            viewButton: "Ver Detalles",
+            bookButton: "Reservar Ahora",
+            noResults: {
+                title: "No se encontraron habitaciones",
+                subtitle: "Intenta ajustar tus criterios de búsqueda"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Aries Suite",
+                    description: "Suite elegante inspirada en la constelación de Aries."
+                },
+                {
+                    id: "venus-suite",
+                    title: "Venus Suite",
+                    description: "Suite lujosa inspirada en la diosa del amor y la belleza."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "Wi-Fi Gratuito",
+                "Air Conditioning": "Aire Acondicionado",
+                "24/7 Reception": "Recepción 24/7",
+                "Entire place to yourself": "Todo el lugar para ti",
+                "Private Bathroom": "Baño Privado",
+                "Balcony": "Balcón",
+                "WiFi": "Wi-Fi",
+                "Kitchen": "Cocina",
+                "City View": "Vista de la Ciudad",
+                "Workspace": "Espacio de Trabajo",
+                "Room Service": "Servicio a la Habitación",
+                "Business Center": "Centro de Negocios",
+                "Parking": "Aparcamiento",
+                "Gym Access": "Acceso al Gimnasio",
+                "Swimming Pool": "Piscina",
+                "Breakfast": "Desayuno"
+            },
+            availabilityLabels: {
+                "Available": "Disponible",
+                "Booked": "Reservado",
+                "Unavailable": "No Disponible"
+            },
+            priceLabels: {
+                "night": "/noche",
+                "per": "por",
+                "from": "desde"
+            }
+        },
+        // Room Details
+        roomDetails: {
+            aboutProperty: "Acerca de Esta Propiedad",
+            suiteSpecifications: "Especificaciones de la Suite",
+            guests: "Huéspedes",
+            bedrooms: "Habitaciones",
+            bathrooms: "Baños",
+            area: "Área",
+            amenities: "Comodidades",
+            freeWifi: "Wi-Fi Gratuito",
+            airConditioning: "Aire Acondicionado",
+            privateBathroom: "Baño Privado",
+            reception24: "Recepción 24/7",
+            facilities: "Instalaciones",
+            entirePlace: "Todo el lugar para ti",
+            size42: "42 m² de tamaño",
+            size32: "32 m² de tamaño",
+            dailyHousekeeping: "Servicio de limpieza diario",
+            terrace: "Terraza",
+            balcony: "Balcón",
+            bathOrShower: "Bañera o ducha",
+            frontDesk24: "Recepción 24 horas",
+            freeWiFi: "Wi-Fi Gratuito",
+            familyRooms: "Habitaciones familiares",
+            shower: "Ducha",
+            pricingAvailability: "Precios y Disponibilidad",
+            bookYourStay: "Reserva tu Estancia",
+            propertyArea: "Área de la Propiedad",
+            attractions: "Atracciones",
+            restaurants: "Restaurantes",
+            bookNowCall: "📞 Reservar Ahora - Llama +30 6955217820 o +30 6947203554",
+            // Common room elements
+            showMore: "Mostrar más",
+            showLess: "Mostrar menos",
+            more: "más",
+            forBookingCall: "Para reservas llámanos al",
+            pricing: "Precios",
+            size: "Tamaño",
+            roomType: "Tipo de Habitación",
+            bathroom: "Baño",
+            built: "Construido",
+            familyRoom: "Habitación Familiar",
+            privateBathroomWithShower: "1 Baño Privado con Ducha",
+            // Property descriptions - Aries
+            ariesDescription1: "Todo el lugar es tuyo. ARIES Suite en Mykonos ofrece una casa de vacaciones con alojamiento cómodo con 42 m² de espacio, dos habitaciones y dos baños.",
+            ariesDescription2: "La propiedad cuenta con 2 baños con bañera o ducha, y se proporcionan secador de pelo y artículos de aseo gratuitos.",
+            ariesDescription3: "El personal de recepción habla árabe, griego e inglés.",
+            ariesDescription4: "Cerca de ARIES Suite encontrarás atracciones populares como el Puerto Viejo de Mykonos, los Molinos de Viento de Mykonos y Pequeña Venecia. El Aeropuerto de Mykonos está a 3 km de la propiedad.",
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Grecia",
+            // Property descriptions - Venus
+            venusSubtitle: "Suite moderna ubicada en Petrou Drakopoulu 14, en el corazón de Mykonos Town.",
+            venusDescription1: "VENUS Suite está ubicada en Petrou Drakopoulu 14 en el centro de Mykonos Town, a solo 300m de la playa Agia Anna. Cuenta con terraza, WiFi gratis, recepción 24 horas y cajero automático. La propiedad fue construida en 1980 y tiene balcón.",
+            venusDescription2: "El alojamiento con aire acondicionado también cuenta con 1 baño con ducha.",
+            venusDescription3: "Cerca de VENUS Suite encontrarás atracciones populares como Pequeña Venecia, Museo Arqueológico de Mykonos y Puerto Viejo de Mykonos. El Aeropuerto de Mykonos está a 3 km de la propiedad.",
+            venusDescription4: "Esta ubicación es especialmente popular entre las parejas: la calificaron con 10,0 para un viaje de dos personas.",
+            // Addresses with Google Maps links
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Grecia",
+            ariesAddressLink: "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece",
+            venusAddress: "Petrou Drakopoulu 14, Mykonos Chora, 846 00, Grecia",
+            venusAddressLink: "https://www.google.com/maps/place/Petrou+Drakopoulu+14,+Mykonos+846+00,+Greece",
+            // Property Area section
+            whatsNearby: "Qué hay cerca",
+            restaurantsCafes: "Restaurantes y Cafés",
+            nearbyBeaches: "Playas Cercanas",
+            nearestAirports: "Aeropuertos más Cercanos",
+            distanceDisclaimer: "Se muestran las distancias más cortas aproximadas caminando o conduciendo. Las distancias reales pueden diferir.",
+            // Nearby Attractions
+            littleVenice: "Pequeña Venecia",
+            meletopoulouGarden: "Jardín Municipal de Meletopoulos",
+            mykonosWindmills: "Molinos de Viento de Mykonos",
+            archaeologicalMuseum: "Museo Arqueológico de Mykonos",
+            fabricaSquare: "Plaza Fabrica",
+            tholosTomb: "Tumba Tholos de Mykonos",
+            armenistisLighthouse: "Faro de Armenistis",
+            neolithicSettlement: "Asentamiento Neolítico de Ftelia Mykonos",
+            gyziCastle: "Castillo de Gyzi",
+            stadiumDistrict: "Distrito del Estadio",
+            // Restaurants & Cafes
+            cafeBarRoom101: "Café/Bar Room 101",
+            cafeBarBoutique: "Café/Bar Boutique di Vito",
+            cafeBarPaloma: "Café/Bar Paloma Bar",
+            // Nearby Beaches
+            agiaAnnaBeach: "Playa de Agia Anna",
+            agiosCharalamposBeach: "Playa de Agios Charalampos",
+            megaliAmmosBeach: "Playa de Megali Ammos",
+            korfosBeach: "Playa de Korfos",
+            tourlosBeach: "Playa de Tourlos",
+            // Nearest Airports
+            mykonosAirport: "Aeropuerto de Mykonos",
+            syrosAirport: "Aeropuerto de Syros",
+            naxosAirport: "Aeropuerto Estatal de Naxos",
+            // Amenities section
+            ariesSuiteAmenities: "Comodidades ARIES Suite",
+            mostPopularAmenities: "Comodidades Más Populares",
+            freeWiFiAmenity: "Wi-Fi Gratuito",
+            reception24Amenity: "Recepción 24 horas",
+            perfectForStay: "Perfecto para tu estancia",
+            parking: "Estacionamiento",
+            noParkingAvailable: "No hay estacionamiento disponible.",
+            internet: "Internet",
+            wifiAvailableInfo: "El Wi-Fi está disponible en todas las áreas y no se cobra.",
+            kitchen: "Cocina",
+            diningTable: "Mesa de comedor",
+            electricKettle: "Hervidor eléctrico",
+            refrigerator: "Refrigerador",
+            bedroom: "Habitación",
+            alarmClock: "Despertador",
+            bathroom: "Baño",
+            toiletPaper: "Papel higiénico",
+            towels: "Toallas",
+            bathOrShowerAmenity: "Bañera o ducha",
+            privateBathroomAmenity: "Baño privado",
+            freeToiletries: "Artículos de aseo gratuitos",
+            hairDryer: "Secador de pelo",
+            livingRoom: "Sala de estar",
+            diningArea: "Área de comedor",
+            sofa: "Sofá",
+            seatingArea: "Área de estar",
+            roomAmenities: "Comodidades de la Habitación",
+            socketNearBed: "Enchufe cerca de la cama",
+            heatedClothesRack: "Perchero calefactado",
+            clothesDryingRack: "Tendedero de ropa",
+            woodenOrParquetFlooring: "Suelo de madera o parquet",
+            tiledMarbleFlooring: "Suelo de azulejos/mármol",
+            privateEntrance: "Entrada privada",
+            heating: "Calefacción",
+            // Additional Services
+            receptionServices: "Servicios de Recepción",
+            invoiceProvision: "Posibilidad de factura",
+            luggageStorage: "Guardaequipajes (cargo extra)",
+            expressCheckInOut: "Check-in/out express (cargo extra)",
+            reception24Hours: "Recepción 24 horas",
+            cleaningServices: "Servicios de Limpieza",
+            dailyHousekeepingExtra: "Servicio de limpieza diario (cargo extra)",
+            communicationLanguages: "Idiomas de Comunicación",
+            arabic: "Árabe",
+            greek: "Griego",
+            english: "Inglés",
+            // FAQ Section
+            faqSectionTitle: "Preguntas Frecuentes",
+            faqSectionSubtitle: "Encuentra respuestas a preguntas comunes sobre nuestras suites",
+            // Property Rules section
+            propertyRulesPolicies: "Reglas y Políticas de la Propiedad",
+            checkInOut: "Check-in/Check-out",
+            checkInTime: "Check-in",
+            checkOutTime: "Check-out",
+            checkInHours: "De 15:00 a 20:00",
+            checkOutHours: "De 08:00 a 12:00",
+            checkInAdvanceNotice: "Debes informar a la propiedad con anticipación sobre tu hora de llegada.",
+            childrenBeds: "Niños y Camas",
+            childrenPolicies: "Políticas para Niños",
+            childrenNotAllowed: "No se permiten niños.",
+            cribExtraBedPolicies: "Políticas de Cunas y Camas Extra",
+            noCribsExtraBeds: "Esta propiedad no dispone de cunas y camas extra disponibles.",
+            noAgeRestrictions: "Sin Restricciones de Edad",
+            noAgeRestrictionsCheckIn: "No hay restricciones de edad para el check-in.",
+            propertyPolicies: "Políticas de la Propiedad",
+            smokingPolicy: "Política de Fumar",
+            smokingNotAllowed: "No se permite fumar.",
+            parties: "Fiestas",
+            partiesNotAllowed: "No se permiten fiestas o eventos.",
+            pets: "Mascotas",
+            petsNotAllowed: "No se permiten mascotas.",
+            // Aries Suite FAQ
+            ariesFAQ: {
+                title: "Preguntas Frecuentes para ARIES Suite",
+                questions: [
+                    {
+                        question: "¿Cuántos huéspedes pueden dormir en la Suite ARIES?",
+                        answer: "La Suite ARIES puede alojar el siguiente número de huéspedes:\n\n3 huéspedes"
+                    },
+                    {
+                        question: "¿Hay balcón en la Suite ARIES?",
+                        answer: "Sí, este alojamiento tiene opciones con balcón. Puede obtener más información sobre esto y otras comodidades de la Suite ARIES en esta página."
+                    },
+                    {
+                        question: "¿Hay terraza en la Suite ARIES?",
+                        answer: "Sí, este alojamiento tiene opciones con terraza. Puede obtener más información sobre esto y otras comodidades de la Suite ARIES en esta página."
+                    },
+                    {
+                        question: "¿Cuáles son los horarios de check-in y check-out en la Suite ARIES?",
+                        answer: "El check-in en la Suite ARIES es a partir de las 15:00 y el check-out es hasta las 12:00."
+                    },
+                    {
+                        question: "¿Cuántos dormitorios tiene la Suite ARIES?",
+                        answer: "La Suite ARIES incluye el siguiente número de dormitorios:\n\n2 dormitorios"
+                    },
+                    {
+                        question: "¿Cuánto cuesta alojarse en la Suite ARIES?",
+                        answer: "Los precios en la Suite ARIES pueden variar según su estancia (es decir, las fechas que seleccione, la política del hotel, etc.). Ingrese sus fechas para ver los precios."
+                    },
+                    {
+                        question: "¿A qué distancia está la Suite ARIES del centro de Mykonos?",
+                        answer: "La Suite ARIES está a 100 m del centro de Mykonos."
+                    },
+                    {
+                        question: "¿Qué tan cerca está la Suite ARIES de la playa?",
+                        answer: "La playa más cercana está a solo 200 m de la Suite ARIES."
+                    },
+                    {
+                        question: "¿Es popular la Suite ARIES entre las familias?",
+                        answer: "Sí, la Suite ARIES es popular entre los huéspedes que reservan estancias familiares."
+                    }
+                ]
+            },
+            // Venus Suite FAQ
+            venusFAQ: {
+                title: "Preguntas Frecuentes para VENUS Suite",
+                questions: [
+                    {
+                        question: "¿Cuántos huéspedes pueden dormir en la Suite VENUS?",
+                        answer: "La Suite VENUS puede alojar el siguiente número de huéspedes:\n\n2 huéspedes"
+                    },
+                    {
+                        question: "¿Hay balcón en la Suite VENUS?",
+                        answer: "Sí, este alojamiento tiene opciones con balcón. Puede obtener más información sobre esto y otras comodidades de la Suite VENUS en esta página."
+                    },
+                    {
+                        question: "¿Cuáles son los horarios de check-in y check-out en la Suite VENUS?",
+                        answer: "El check-in en la Suite VENUS es a partir de las 15:00 y el check-out es hasta las 11:00."
+                    },
+                    {
+                        question: "¿Cuántos dormitorios tiene la Suite VENUS?",
+                        answer: "La Suite VENUS incluye el siguiente número de dormitorios:\n\n1 dormitorio"
+                    },
+                    {
+                        question: "¿Cuánto cuesta alojarse en la Suite VENUS?",
+                        answer: "Los precios en la Suite VENUS pueden variar según su estancia (es decir, las fechas que seleccione, la política del hotel, etc.). Ingrese sus fechas para ver los precios."
+                    },
+                    {
+                        question: "¿A qué distancia está la Suite VENUS del centro de Mykonos?",
+                        answer: "La Suite VENUS está a 100 m del centro de Mykonos."
+                    },
+                    {
+                        question: "¿Qué tan cerca está la Suite VENUS de la playa?",
+                        answer: "La playa más cercana está a solo 200 m de la Suite VENUS."
+                    },
+                    {
+                        question: "¿Es popular la Suite VENUS entre las familias?",
+                        answer: "Sí, la Suite VENUS es popular entre los huéspedes que reservan estancias familiares."
+                    }
+                ]
+            }
+        },
+        // Footer
+        footer: {
+            brandName: "Habitaciones de Nana en Booking",
+            description: "Tu socio de confianza para encontrar el alojamiento perfecto",
+            subDescription: "Estancias cómodas, precios asequibles.",
+            quickLinks: {
+                title: "Enlaces Rápidos",
+                home: "Inicio",
+                rooms: "Habitaciones",
+                about: "Acerca de Nosotros",
+                contact: "Contacto"
+            },
+            support: {
+                title: "Soporte",
+                helpCenter: "Centro de Ayuda",
+                safety: "Seguridad",
+                cancellation: "Cancelación",
+                terms: "Términos y Condiciones"
+            },
+            contactInfo: {
+                title: "Información de Contacto",
+                email: "nanasroomspc@gmail.com",
+                phone: "+30 6955217820",
+                phone2: "+30 6947203554",
+                address: "Mykonos Chora",
+                bookingAries: "Reservar Aries Suite en Booking.com",
+                bookingVenus: "Reserve Venus Suite en Booking.com",
+                bookingAriesLink: "https://www.booking.com/hotel/gr/aries-suites.el.html?aid=356980&label=gog235jc-10CAsoXEIMYXJpZXMtc3VpdGVzSAlYA2hciAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuAKu0ejEBsACAdICJDY5NzA3NmVkLWQzZjctNDg3Mi1iZWViLWJmZGJlNzhlNTAyNtgCAeACAQ&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&",
+                bookingVenusLink: "https://www.booking.com/hotel/gr/nanas-mykonos.el.html?label=gen173nr-10CAsoXEINbmFuYXMtbXlrb25vc0gzWARoXIgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCtcXoxAbAAgHSAiQ5ZmFlMmZkYi0zY2E1LTRhYTktOGUxYi01NDNjM2IwNGUxNjXYAgHgAgE&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&"
+            },
+            copyright: "© 2025 Nana's Rooms. Todos los derechos reservados."
+        }
+    },
+    ar: {
+        // Navbar
+        navbar: {
+            brandName: "غرف نانا على بوكينج",
+            mobile: "📱 الهاتف المحمول",
+            maps: "🗺️ الخرائط",
+            email: "📧 atdimitriadou@gmail.com",
+            language: "🌐 ع",
+            selectLang: "اختيار اللغة",
+            callUs: "اتصل بنا",
+            viewOnMaps: "عرض على خرائط جوجل"
+        },
+        // Hero section
+        hero: {
+            slides: [
+                {
+                    title: "مرحباً بكم في Nana's Rooms",
+                    subtitle: "أماكن إقامة أصيلة في ميكونوس في قلب تشورا"
+                },
+                {
+                    title: "مريح وأنيق",
+                    subtitle: "وسائل راحة حديثة مع سحر الكيكلاديين التقليدي"
+                },
+                {
+                    title: "موقع مثالي",
+                    subtitle: "على بعد خطوات من الحياة الليلية النابضة بالحياة في ميكونوس"
+                },
+                {
+                    title: "ملاذات مريحة",
+                    subtitle: "منزلك بعيداً عن المنزل في ميكونوس الجميلة"
+                },
+                {
+                    title: "الحياة الجزيرة",
+                    subtitle: "اختبر سحر الضيافة اليونانية الجزيرة"
+                },
+                {
+                    title: "إقامات لا تُنسى",
+                    subtitle: "اصنع ذكريات تدوم إلى الأبد"
+                }
+            ],
+            description: "اكتشف غرف مريحة وبأسعار معقولة في مواقع مميزة. منزلك بعيداً عن المنزل ينتظرك بوسائل الراحة الحديثة والخدمة الاستثنائية.",
+            searchPlaceholder: "أين تود أن تقيم؟",
+            searchButton: "البحث عن غرف",
+            exploreButton: "استكشاف الغرف",
+            features: [
+                "عقارات موثقة",
+                "أفضل الأسعار",
+                "حجز آمن"
+            ]
+        },
+        // Welcome Section
+        welcome: {
+            title: "مرحباً بكم في NANA'S ROOMS",
+            subtitle: "في ميكونوس تشورا.",
+            description: "يسرنا استضافتكم لقضاء عطلات لا تُنسى في جزيرة ميكونوس الكوزموبوليتانية."
+        },
+        // Room Gallery
+        gallery: {
+            heading: "ابحث عن جناحك المثالي",
+            searchPlaceholder: "البحث عن غرف...",
+            priceFilter: "نطاق الأسعار:",
+            priceOptions: {
+                all: "جميع الأسعار",
+                low: "أقل من €100",
+                mid: "€100 - €150",
+                high: "أكثر من €150"
+            },
+            resultsCount: (count) => `تم العثور على ${count} غرفة`,
+            viewButton: "عرض التفاصيل",
+            bookButton: "احجز الآن",
+            noResults: {
+                title: "لم يتم العثور على غرف",
+                subtitle: "حاول تعديل معايير البحث"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Aries Suite",
+                    description: "جناح أنيق مستوحى من كوكبة الحمل."
+                },
+                {
+                    id: "venus-suite",
+                    title: "Venus Suite",
+                    description: "جناح فاخر مستوحى من إلهة الحب والجمال."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "واي فاي مجاني",
+                "Air Conditioning": "تكييف الهواء",
+                "24/7 Reception": "استقبال 24/7",
+                "Entire place to yourself": "المكان كله لك",
+                "Private Bathroom": "حمام خاص",
+                "Balcony": "شرفة",
+                "WiFi": "واي فاي",
+                "Kitchen": "مطبخ",
+                "City View": "إطلالة على المدينة",
+                "Workspace": "مساحة عمل",
+                "Room Service": "خدمة الغرف",
+                "Business Center": "مركز الأعمال",
+                "Parking": "موقف سيارات",
+                "Gym Access": "دخول للنادي الرياضي",
+                "Swimming Pool": "حمام سباحة",
+                "Breakfast": "إفطار"
+            },
+            availabilityLabels: {
+                "Available": "متاح",
+                "Booked": "محجوز",
+                "Unavailable": "غير متاح"
+            },
+            priceLabels: {
+                "night": "/ليلة",
+                "per": "لكل",
+                "from": "من"
+            }
+        },
+        // Room Details
+        roomDetails: {
+            aboutProperty: "حول هذا العقار",
+            suiteSpecifications: "مواصفات الجناح",
+            guests: "الضيوف",
+            bedrooms: "غرف النوم",
+            bathrooms: "الحمامات",
+            area: "المساحة",
+            amenities: "وسائل الراحة",
+            freeWifi: "واي فاي مجاني",
+            airConditioning: "تكييف الهواء",
+            privateBathroom: "حمام خاص",
+            reception24: "استقبال 24/7",
+            facilities: "المرافق",
+            entirePlace: "المكان كله لك",
+            size42: "42 متر مربع",
+            size32: "32 متر مربع",
+            dailyHousekeeping: "خدمة التنظيف اليومية",
+            terrace: "شرفة",
+            balcony: "بلكونة",
+            bathOrShower: "حوض استحمام أو دش",
+            frontDesk24: "مكتب استقبال 24 ساعة",
+            freeWiFi: "واي فاي مجاني",
+            familyRooms: "غرف عائلية",
+            shower: "دش",
+            pricingAvailability: "الأسعار والتوافر",
+            bookYourStay: "احجز إقامتك",
+            propertyArea: "منطقة العقار",
+            attractions: "المعالم السياحية",
+            restaurants: "المطاعم",
+            bookNowCall: "📞 احجز الآن - اتصل +30 6955217820 أو +30 6947203554",
+            // Common room elements
+            showMore: "عرض المزيد",
+            showLess: "عرض أقل",
+            more: "المزيد",
+            forBookingCall: "للحجز اتصل بنا على",
+            pricing: "الأسعار",
+            size: "الحجم",
+            roomType: "نوع الغرفة",
+            bathroom: "حمام",
+            built: "بُني",
+            familyRoom: "غرفة عائلية",
+            privateBathroomWithShower: "حمام خاص واحد مع دش",
+            // Property descriptions - Aries
+            ariesDescription1: "المكان كله لك. جناح ARIES في ميكونوس يوفر منزل عطلات مع إقامة مريحة تتميز بمساحة 42 متر مربع، غرفتي نوم وحمامين.",
+            ariesDescription2: "يتميز العقار بحمامين مع حوض أستحمام أو دش، ويتم توفير مجفف الشعر ولوازم الحمام المجانية.",
+            ariesDescription3: "يتحدث موظفو الاستقبال العربية واليونانية والإنجليزية.",
+            ariesDescription4: "بالقرب من جناح ARIES ستجد معالم سياحية شهيرة مثل ميناء ميكونوس القديم، طواحين الهواء في ميكونوس وفينيسيا الصغيرة. مطار ميكونوس على بعد 3 كم من العقار.",
+            ariesAddress: "كاليارتشي 9، ميكونوس تشورا، 846 00، اليونان",
+            // Property descriptions - Venus
+            venusSubtitle: "جناح حديث يقع في بيترو دراكوبولو 14، في قلب مدينة ميكونوس.",
+            venusDescription1: "يقع جناح VENUS في بيترو دراكوبولو 14 في وسط مدينة ميكونوس، على بعد 300 متر فقط من شاطئ أجيا آنا. يتميز بشرفة، واي فاي مجاني، مكتب استقبال 24 ساعة وصراف آلي. تم بناء العقار في عام 1980 وله شرفة.",
+            venusDescription2: "يحتوي المكان المكيف أيضاً على حمام واحد مع دش.",
+            venusDescription3: "بالقرب من جناح VENUS ستجد معالم سياحية شهيرة مثل فينيسيا الصغيرة، متحف ميكونوس الأثري وميناء ميكونوس القديم. مطار ميكونوس على بعد 3 كم من العقار.",
+            venusDescription4: "هذا الموقع مشهور بشكل خاص بين الأزواج - قيموه بـ 10.0 لرحلة شخصين.",
+            // Addresses with Google Maps links
+            ariesAddress: "كاليارتشي 9، ميكونوس تشورا، 846 00، اليونان",
+            ariesAddressLink: "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece",
+            venusAddress: "بيترو دراكوبولو 14، ميكونوس تشورا، 846 00، اليونان",
+            venusAddressLink: "https://www.google.com/maps/place/Petrou+Drakopoulu+14,+Mykonos+846+00,+Greece",
+            // Property Area section
+            whatsNearby: "ما هو قريب",
+            restaurantsCafes: "المطاعم والمقاهي",
+            nearbyBeaches: "الشواطئ القريبة",
+            nearestAirports: "أقرب المطارات",
+            distanceDisclaimer: "يتم عرض أقصر المسافات التقريبية سيراً أو بالسيارة. قد تختلف المسافات الفعلية.",
+            // Nearby Attractions
+            littleVenice: "فينيسيا الصغيرة",
+            meletopoulouGarden: "حديقة ميليتوبولوس البلدية",
+            mykonosWindmills: "طواحين الهواء في ميكونوس",
+            archaeologicalMuseum: "متحف ميكونوس الأثري",
+            fabricaSquare: "ساحة فابريكا",
+            tholosTomb: "مقبرة ثولوس في ميكونوس",
+            armenistisLighthouse: "منارة أرمينيستيس",
+            neolithicSettlement: "المستوطنة النيوليتية في فتيليا ميكونوس",
+            gyziCastle: "قلعة غيزي",
+            stadiumDistrict: "منطقة الملعب",
+            // Restaurants & Cafes
+            cafeBarRoom101: "مقهى/بار Room 101",
+            cafeBarBoutique: "مقهى/بار Boutique di Vito",
+            cafeBarPaloma: "مقهى/بار Paloma Bar",
+            // Nearby Beaches
+            agiaAnnaBeach: "شاطئ أجيا آنا",
+            agiosCharalamposBeach: "شاطئ أجيوس خارالامبوس",
+            megaliAmmosBeach: "شاطئ ميجالي أموس",
+            korfosBeach: "شاطئ كورفوس",
+            tourlosBeach: "شاطئ تورلوس",
+            // Nearest Airports
+            mykonosAirport: "مطار ميكونوس",
+            syrosAirport: "مطار سيروس",
+            naxosAirport: "مطار ناكسوس الحكومي",
+            // Amenities section
+            ariesSuiteAmenities: "مرافق جناح ARIES",
+            mostPopularAmenities: "المرافق الأكثر شعبية",
+            freeWiFiAmenity: "واي فاي مجاني",
+            reception24Amenity: "استقبال 24 ساعة",
+            perfectForStay: "مثالي لإقامتك",
+            parking: "موقف سيارات",
+            noParkingAvailable: "لا يوجد موقف سيارات متاح.",
+            internet: "الإنترنت",
+            wifiAvailableInfo: "الواي فاي متاح في جميع الأنحاء وغير مكلف.",
+            kitchen: "المطبخ",
+            diningTable: "طاولة الطعام",
+            electricKettle: "غلاية كهربائية",
+            refrigerator: "ثلاجة",
+            bedroom: "غرفة النوم",
+            alarmClock: "منبه",
+            bathroom: "الحمام",
+            toiletPaper: "ورق المرحاض",
+            towels: "المناشف",
+            bathOrShowerAmenity: "حوض أو دش",
+            privateBathroomAmenity: "حمام خاص",
+            freeToiletries: "لوازم الحمام المجانية",
+            hairDryer: "مجفف الشعر",
+            livingRoom: "غرفة المعيشة",
+            diningArea: "منطقة الطعام",
+            sofa: "أريكة",
+            seatingArea: "منطقة الجلوس",
+            roomAmenities: "مرافق الغرفة",
+            socketNearBed: "مقبس بالقرب من السرير",
+            heatedClothesRack: "رف ملابس ساخن",
+            clothesDryingRack: "رف تجفيف الملابس",
+            woodenOrParquetFlooring: "أرضية خشبية أو باركيه",
+            tiledMarbleFlooring: "أرضية بلاط/رخام",
+            privateEntrance: "مدخل خاص",
+            heating: "تدفئة",
+            // Additional Services
+            receptionServices: "خدمات الاستقبال",
+            invoiceProvision: "إمكانية توفير فاتورة",
+            luggageStorage: "تخزين الأمتعة (رسوم إضافية)",
+            expressCheckInOut: "تسجيل وصول/مغادرة سريع (رسوم إضافية)",
+            reception24Hours: "استقبال 24 ساعة",
+            cleaningServices: "خدمات التنظيف",
+            dailyHousekeepingExtra: "تنظيف يومي (رسوم إضافية)",
+            communicationLanguages: "لغات التواصل",
+            arabic: "العربية",
+            greek: "اليونانية",
+            english: "الإنجليزية",
+            // FAQ Section
+            faqSectionTitle: "الأسئلة الشائعة",
+            faqSectionSubtitle: "اعثر على إجابات للأسئلة الشائعة حول أجنحتنا",
+            // Aries Suite FAQ
+            ariesFAQ: {
+                title: "الأسئلة الشائعة لجناح ARIES",
+                questions: [
+                    {
+                        question: "كم عدد الضيوف الذين يمكنهم النوم في جناح ARIES؟",
+                        answer: "يمكن لجناح ARIES استيعاب العدد التالي من الضيوف:\n\n3 ضيوف"
+                    },
+                    {
+                        question: "هل يوجد شرفة في جناح ARIES؟",
+                        answer: "نعم، يوفر هذا السكن خيارات مع شرفة. يمكنك معرفة المزيد عن ذلك والمرافق الأخرى لجناح ARIES في هذه الصفحة."
+                    },
+                    {
+                        question: "هل يوجد تراس في جناح ARIES؟",
+                        answer: "نعم، يوفر هذا السكن خيارات مع تراس. يمكنك معرفة المزيد عن ذلك والمرافق الأخرى لجناح ARIES في هذه الصفحة."
+                    },
+                    {
+                        question: "ما هي مواعيد تسجيل الوصول والمغادرة في جناح ARIES؟",
+                        answer: "تسجيل الوصول في جناح ARIES يبدأ من الساعة 15:00 وتسجيل المغادرة حتى الساعة 12:00."
+                    },
+                    {
+                        question: "كم عدد غرف النوم في جناح ARIES؟",
+                        answer: "يحتوي جناح ARIES على عدد غرف النوم التالي:\n\n2 غرفة نوم"
+                    },
+                    {
+                        question: "كم يكلف الإقامة في جناح ARIES؟",
+                        answer: "قد تختلف الأسعار في جناح ARIES حسب إقامتك (أي التواريخ التي تحددها، سياسة الفندق، إلخ). أدخل تواريخك لمعرفة الأسعار."
+                    },
+                    {
+                        question: "ما المسافة بين جناح ARIES ووسط مدينة ميكونوس؟",
+                        answer: "يقع جناح ARIES على بعد 100 متر من وسط مدينة ميكونوس."
+                    },
+                    {
+                        question: "ما مدى قرب جناح ARIES من الشاطئ؟",
+                        answer: "أقرب شاطئ يبعد فقط 200 متر عن جناح ARIES."
+                    },
+                    {
+                        question: "هل جناح ARIES شائع بين العائلات؟",
+                        answer: "نعم، جناح ARIES شائع بين الضيوف الذين يحجزون إقامات عائلية."
+                    }
+                ]
+            },
+            // Venus Suite FAQ
+            venusFAQ: {
+                title: "الأسئلة الشائعة لجناح VENUS",
+                questions: [
+                    {
+                        question: "كم عدد الضيوف الذين يمكنهم النوم في جناح VENUS؟",
+                        answer: "يمكن لجناح VENUS استيعاب العدد التالي من الضيوف:\n\n2 ضيوف"
+                    },
+                    {
+                        question: "هل يوجد شرفة في جناح VENUS؟",
+                        answer: "نعم، يوفر هذا السكن خيارات مع شرفة. يمكنك معرفة المزيد عن ذلك والمرافق الأخرى لجناح VENUS في هذه الصفحة."
+                    },
+                    {
+                        question: "ما هي مواعيد تسجيل الوصول والمغادرة في جناح VENUS؟",
+                        answer: "تسجيل الوصول في جناح VENUS يبدأ من الساعة 15:00 وتسجيل المغادرة حتى الساعة 11:00."
+                    },
+                    {
+                        question: "كم عدد غرف النوم في جناح VENUS؟",
+                        answer: "يحتوي جناح VENUS على عدد غرف النوم التالي:\n\n1 غرفة نوم"
+                    },
+                    {
+                        question: "كم يكلف الإقامة في جناح VENUS؟",
+                        answer: "قد تختلف الأسعار في جناح VENUS حسب إقامتك (أي التواريخ التي تحددها، سياسة الفندق، إلخ). أدخل تواريخك لمعرفة الأسعار."
+                    },
+                    {
+                        question: "ما المسافة بين جناح VENUS ووسط مدينة ميكونوس؟",
+                        answer: "يقع جناح VENUS على بعد 100 متر من وسط مدينة ميكونوس."
+                    },
+                    {
+                        question: "ما مدى قرب جناح VENUS من الشاطئ؟",
+                        answer: "أقرب شاطئ يبعد فقط 200 متر عن جناح VENUS."
+                    },
+                    {
+                        question: "هل جناح VENUS شائع بين العائلات؟",
+                        answer: "نعم، جناح VENUS شائع بين الضيوف الذين يحجزون إقامات عائلية."
+                    }
+                ]
+            },
+            // Property Rules section
+            propertyRulesPolicies: "قوانين وسياسات العقار",
+            checkInOut: "تسجيل الوصول/المغادرة",
+            checkInTime: "تسجيل الوصول",
+            checkOutTime: "تسجيل المغادرة",
+            checkInHours: "من 3:00 مساءً إلى 8:00 مساءً",
+            checkOutHours: "من 8:00 صباحاً إلى 12:00 ظهراً",
+            checkInAdvanceNotice: "يجب إبلاغ العقار مسبقاً عن وقت وصولك.",
+            childrenBeds: "الأطفال والأسرة",
+            childrenPolicies: "سياسات الأطفال",
+            childrenNotAllowed: "لا يُسمح بالأطفال.",
+            cribExtraBedPolicies: "سياسات أسرة الأطفال والأسرة الإضافية",
+            noCribsExtraBeds: "هذا العقار لا يوفر أسرة أطفال أو أسرة إضافية.",
+            noAgeRestrictions: "بدون قيود عمرية",
+            noAgeRestrictionsCheckIn: "لا توجد قيود عمرية لتسجيل الوصول.",
+            propertyPolicies: "سياسات العقار",
+            smokingPolicy: "سياسة التدخين",
+            smokingNotAllowed: "لا يُسمح بالتدخين.",
+            parties: "الحفلات",
+            partiesNotAllowed: "لا يُسمح بالحفلات أو الفعاليات.",
+            pets: "الحيوانات الأليفة",
+            petsNotAllowed: "لا يُسمح بالحيوانات الأليفة."
+        },
+        // Footer
+        footer: {
+            brandName: "غرف نانا على بوكينج",
+            description: "شريكك الموثوق في العثور على الإقامة المثالية",
+            subDescription: "إقامات مريحة، أسعار معقولة.",
+            quickLinks: {
+                title: "روابط سريعة",
+                home: "الرئيسية",
+                rooms: "الغرف",
+                about: "من نحن",
+                contact: "اتصل بنا"
+            },
+            support: {
+                title: "الدعم",
+                helpCenter: "مركز المساعدة",
+                safety: "الأمان",
+                cancellation: "الإلغاء",
+                terms: "الشروط والأحكام"
+            },
+            contactInfo: {
+                title: "معلومات الاتصال",
+                email: "nanasroomspc@gmail.com",
+                phone: "+30 6955217820",
+                phone2: "+30 6947203554",
+                address: "ميكونوس تشورا",
+                bookingAries: "احجز Aries Suite على Booking.com",
+                bookingVenus: "احجز Venus Suite على Booking.com",
+                bookingAriesLink: "https://www.booking.com/hotel/gr/aries-suites.el.html?aid=356980&label=gog235jc-10CAsoXEIMYXJpZXMtc3VpdGVzSAlYA2hciAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuAKu0ejEBsACAdICJDY5NzA3NmVkLWQzZjctNDg3Mi1iZWViLWJmZGJlNzhlNTAyNtgCAeACAQ&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&",
+                bookingVenusLink: "https://www.booking.com/hotel/gr/nanas-mykonos.el.html?label=gen173nr-10CAsoXEINbmFuYXMtbXlrb25vc0gzWARoXIgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCtcXoxAbAAgHSAiQ5ZmFlMmZkYi0zY2E1LTRhYTktOGUxYi01NDNjM2IwNGUxNjXYAgHgAgE&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&"
+            },
+            copyright: "© 2025 Nana's Rooms. جميع الحقوق محفوظة."
+        },
+        // Templates and Form Field Labels
+        templates: {
+            fieldLabels: {
+                firstName: "الاسم الأول",
+                lastName: "اسم العائلة",
+                email: "البريد الإلكتروني",
+                phone: "الهاتف"
+            }
+        }
+    },
+    fr: {
+    licenseLabel: "Numéro de licence:",
+    // Navbar
+    navbar: {
+            brandName: "Nana's Rooms on Booking",
+            mobile: "📱 Mobile",
+            maps: "🗺️ Cartes",
+            email: "📧 atdimitriadou@gmail.com",
+            language: "🌐 FR",
+            selectLang: "Sélectionner la langue",
+            callUs: "Appelez-nous",
+            viewOnMaps: "Voir sur Google Maps"
+        },
+        welcome: {
+            title: "BIENVENUE CHEZ NANA'S ROOMS",
+            subtitle: "À MYKONOS CHORA.",
+            description: "Nous sommes ravis de vous accueillir pour des vacances inoubliables au bord de la mer,"
+        },
+        // Hero section
+        hero: {
+            slides: [
+                {
+                    title: "Hébergements Cycladiques",
+                    subtitle: "Vie insulaire authentique avec confort moderne"
+                },
+                {
+                    title: "Appartements Confortables",
+                    subtitle: "Parfait pour les voyageurs solitaires et nomades digitaux"
+                },
+                {
+                    title: "Espaces Familiaux",
+                    subtitle: "Hébergements spacieux pour groupes et familles"
+                },
+                {
+                    title: "Vie Contemporaine",
+                    subtitle: "Équipements modernes dans des emplacements de choix"
+                },
+                {
+                    title: "Retraites Balnéaires de Mykonos",
+                    subtitle: "Chambres charmantes à quelques pas des vagues égéennes"
+                }
+            ],
+            description: "Découvrez des chambres confortables et abordables dans des emplacements de choix. Votre chez-vous loin de chez vous vous attend avec des équipements modernes et un service exceptionnel.",
+            searchPlaceholder: "Où aimeriez-vous séjourner ?",
+            searchButton: "Rechercher des Chambres",
+            exploreButton: "Explorer les Chambres",
+            features: [
+                "Propriétés Vérifiées",
+                "Meilleurs Prix",
+                "Réservation Sécurisée"
+            ]
+        },
+        // Gallery section
+        gallery: {
+            heading: "Trouvez Votre Suite Parfaite",
+            searchPlaceholder: "Rechercher des chambres...",
+            priceFilter: "Gamme de Prix:",
+            title: "Nos Chambres",
+            subtitle: "Choisissez parmi nos hébergements soigneusement conçus",
+            viewMore: "Voir Plus",
+            bookNow: "Réserver Maintenant",
+            priceOptions: {
+                all: "Tous les Prix",
+                low: "Moins de 100€",
+                mid: "100€ - 150€",
+                high: "Plus de 150€"
+            },
+            resultsCount: (count) => `${count} chambre${count !== 1 ? 's' : ''} trouvée${count !== 1 ? 's' : ''}`,
+            viewButton: "Voir Détails",
+            bookButton: "Réserver",
+            noResults: {
+                title: "Aucune chambre trouvée",
+                message: "Essayez d'ajuster vos filtres"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Suite Aries",
+                    description: "Suite élégante inspirée de la constellation du Bélier."
+                },
+                {
+                    id: "venus-suite",
+                    title: "Suite Venus",
+                    description: "Suite luxueuse inspirée de la déesse de l'amour et de la beauté."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "Wi-Fi Gratuit",
+                "Air Conditioning": "Climatisation",
+                "24/7 Reception": "Réception 24/7"
+            }
+        },
+        // Room Details
+        roomDetails: {
+            aboutProperty: "À Propos de la Propriété",
+            suiteSpecifications: "Spécifications de la Suite",
+            guests: "Invités",
+            bedrooms: "Chambres",
+            bathrooms: "Salles de bain",
+            area: "Superficie",
+            amenities: "Équipements",
+            freeWifi: "Wi-Fi Gratuit",
+            airConditioning: "Climatisation",
+            privateBathroom: "Salle de Bain Privée",
+            reception24: "Réception 24/7",
+            pricingAvailability: "Tarifs et Disponibilité",
+            bookYourStay: "Réservez Votre Séjour",
+            propertyArea: "Zone de la Propriété",
+            attractions: "Attractions",
+            restaurants: "Restaurants",
+            beachesTransportation: "Plages et Transport",
+            additionalInfo: "Informations Supplémentaires",
+            paymentPolicies: "Paiement et Politiques",
+            contactInformation: "Informations de Contact",
+            upToGuests: "Jusqu'à 4 invités",
+            twoBedroomsTwo: "2 chambres",
+            twoBathrooms: "2 salles de bain",
+            perNight: "/nuit",
+            priceVaryNote: "Les prix peuvent varier selon la saison et la disponibilité",
+            callDirectly: "Appelez-nous directement pour réserver votre séjour ou pour toute demande. Nous parlons grec, anglais et arabe.",
+            available24: "Disponible 24h/24",
+            readyToBook: "Prêt à Réserver Votre Séjour?",
+            experienceLuxury: "Vivez le luxe et le confort de la Suite Aries au cœur de Mykonos. Notre équipe dédiée est prête à vous assister 24h/24 pour rendre votre séjour inoubliable.",
+            callNow: "Appelez Maintenant",
+            available: "Disponible",
+            support24: "Support 24/7",
+            location: "Emplacement",
+            mykonosTown: "Ville de Mykonos",
+            bookNowCall: "📞 Réserver Maintenant - Appelez +30 6955217820 ou +30 6947203554",
+            // Common room elements
+            showMore: "Voir Plus",
+            showLess: "Voir Moins",
+            more: "plus",
+            forBookingCall: "Pour réserver, appelez-nous au",
+            pricing: "Tarifs",
+            size: "Taille",
+            roomType: "Type de Chambre",
+            bathroom: "Salle de Bain",
+            built: "Construit",
+            familyRoom: "Chambre Familiale",
+            privateBathroomWithShower: "1 Salle de Bain Privée avec Douche",
+            size32: "32 m² de superficie",
+            size42: "42 m² de superficie",
+            // Facilities section
+            facilities: "Installations",
+            entirePlace: "Tout l'endroit à votre disposition",
+            freeWiFi: "Wi-Fi Gratuit",
+            familyRooms: "Chambres familiales",
+            nonSmokingRooms: "Chambres non-fumeurs",
+            balcony: "Balcon",
+            terrace: "Terrasse",
+            shower: "Douche",
+            bathOrShower: "Baignoire ou Douche",
+            frontDesk24: "Réception 24h/24",
+            dailyHousekeeping: "Ménage Quotidien",
+            // Property descriptions - Aries
+            ariesSubtitle: "Suite moderne située au Kalliarchou 9, au cœur de la ville de Mykonos.",
+            ariesDescription1: "L'ARIES Suite est situé au Kalliarchou 9 dans le centre de la ville de Mykonos et se trouve à seulement 300m de la plage d'Agia Anna. Il dispose d'une terrasse, du Wi-Fi gratuit, d'une réception 24h/24 et d'un distributeur automatique. L'hébergement a été construit en 1980 et dispose d'un balcon.",
+            ariesDescription2: "L'hébergement climatisé dispose également d'1 salle de bain avec douche.",
+            ariesDescription3: "Près de l'ARIES Suite, vous trouverez des points d'intérêt populaires, tels que la Petite Venise, le Musée Archéologique de Mykonos et l'Ancien Port de Mykonos. L'aéroport de Mykonos se trouve à 3 km de l'hébergement.",
+            ariesDescription4: "L'emplacement est particulièrement apprécié par les couples – ils lui ont donné une note de 10,0 pour un voyage à deux.",
+            // Property descriptions - Venus
+            venusSubtitle: "Suite moderne située au Petrou Drakopoulou 14, au cœur de la ville de Mykonos.",
+            venusDescription1: "La VENUS Suite est située au Petrou Drakopoulou 14 dans le centre de la ville de Mykonos et se trouve à seulement 300m de la plage d'Agia Anna. Elle dispose d'une terrasse, du Wi-Fi gratuit, d'une réception 24h/24 et d'un distributeur automatique. L'hébergement a été construit en 1980 et dispose d'un balcon.",
+            venusDescription2: "L'hébergement climatisé dispose également d'1 salle de bain avec douche.",
+            venusDescription3: "Près de la VENUS Suite, vous trouverez des points d'intérêt populaires, tels que la Petite Venise, le Musée Archéologique de Mykonos et l'Ancien Port de Mykonos. L'aéroport de Mykonos se trouve à 3 km de l'hébergement.",
+            venusDescription4: "L'emplacement est particulièrement apprécié par les couples – ils lui ont donné une note de 10,0 pour un voyage à deux.",
+            // Addresses with Google Maps links
+            ariesAddress: "Kalliarchi 9, Mykonos Chora, 846 00, Grèce",
+            ariesAddressLink: "https://www.google.com/maps/place/Kalliarchi+9,+Mykonos+846+00,+Greece",
+            venusAddress: "Petrou Drakopoulou 14, Mykonos Chora, 846 00, Grèce",
+            venusAddressLink: "https://www.google.com/maps/place/Petrou+Drakopoulu+14,+Mykonos+846+00,+Greece",
+            // Nearest Airports
+            mykonosAirport: "Aéroport de Mykonos",
+            syrosAirport: "Aéroport de Syros",
+            naxosAirport: "Aéroport d'État de Naxos",
+            // Amenities section  
+            propertyArea: "Zone de la Propriété",
+            ariesSuiteAmenities: "Équipements de la Suite ARIES",
+            venusSuiteAmenities: "Équipements de la Suite VENUS",
+            mostPopularAmenities: "Équipements les Plus Populaires",
+            freeWiFiAmenity: "Wi-Fi Gratuit",
+            reception24Amenity: "Réception 24 heures",
+            perfectForStay: "Parfait pour votre séjour",
+            parking: "Parking",
+            noParkingAvailable: "Aucun parking disponible.",
+            internet: "Internet",
+            wifiAvailableInfo: "Le Wi-Fi est disponible partout et n'est pas facturé.",
+            kitchen: "Cuisine",
+            diningTable: "Table à manger",
+            electricKettle: "Bouilloire électrique",
+            refrigerator: "Réfrigérateur",
+            bedroom: "Chambre",
+            alarmClock: "Réveil",
+            bathroom: "Salle de bain",
+            toiletPaper: "Papier toilette",
+            towels: "Serviettes",
+            bathOrShowerAmenity: "Baignoire ou douche",
+            privateBathroomAmenity: "Salle de bain privée",
+            freeToiletries: "Articles de toilette gratuits",
+            hairDryer: "Sèche-cheveux",
+            livingRoom: "Salon",
+            diningArea: "Coin repas",
+            sofa: "Canapé",
+            seatingArea: "Coin salon",
+            roomAmenities: "Équipements de la Chambre",
+            socketNearBed: "Prise près du lit",
+            heatedClothesRack: "Portant à vêtements chauffant",
+            clothesDryingRack: "Étendoir à linge",
+            woodenOrParquetFlooring: "Parquet ou sol en bois",
+            tiledMarbleFlooring: "Carrelage/sol en marbre",
+            privateEntrance: "Entrée privée",
+            heating: "Chauffage",
+            // Additional Services
+            receptionServices: "Services de Réception",
+            invoiceProvision: "Fourniture de facture possible",
+            luggageStorage: "Consigne à bagages (supplément)",
+            expressCheckInOut: "Enregistrement/départ express (supplément)",
+            reception24Hours: "Réception 24 heures",
+            cleaningServices: "Services de Nettoyage",
+            dailyHousekeepingExtra: "Ménage quotidien (supplément)",
+            communicationLanguages: "Langues de Communication",
+            arabic: "Arabe",
+            greek: "Grec",
+            english: "Anglais",
+            // Property Rules section
+            propertyRulesPolicies: "Règles et Politiques de la Propriété",
+            checkInOut: "Enregistrement/Départ",
+            checkInTime: "Enregistrement",
+            checkOutTime: "Départ",
+            checkInHours: "De 15h00 à 20h00",
+            checkOutHours: "De 8h00 à 12h00",
+            checkInAdvanceNotice: "Vous devez informer la propriété à l'avance de votre heure d'arrivée.",
+            childrenBeds: "Enfants et Lits",
+            childrenPolicies: "Politiques Enfants",
+            childrenNotAllowed: "Les enfants ne sont pas autorisés.",
+            cribExtraBedPolicies: "Politiques Lit Bébé et Lit d'Appoint",
+            noCribsExtraBeds: "Cette propriété n'a pas de lits bébé et lits d'appoint disponibles.",
+            noAgeRestrictions: "Aucune Restriction d'Âge",
+            noAgeRestrictionsCheckIn: "Il n'y a aucune restriction d'âge pour l'enregistrement.",
+            propertyPolicies: "Politiques de la Propriété",
+            smokingPolicy: "Politique Tabac",
+            smokingNotAllowed: "Il est interdit de fumer.",
+            parties: "Fêtes",
+            partiesNotAllowed: "Les fêtes ou événements ne sont pas autorisés.",
+            pets: "Animaux",
+            petsNotAllowed: "Les animaux ne sont pas autorisés.",
+            // Property Area section
+            whatsNearby: "Ce qui se trouve à proximité",
+            restaurantsCafes: "Restaurants et cafés",
+            nearbyBeaches: "Plages à proximité",
+            nearestAirports: "Aéroports les plus proches",
+            distanceDisclaimer: "Les distances les plus courtes approximatives à pied ou en voiture sont affichées. Les distances réelles peuvent différer.",
+            // Nearby Attractions
+            littleVenice: "Petite Venise",
+            meletopoulouGarden: "Jardin Municipal de Meletopoulos",
+            mykonosWindmills: "Moulins à Vent de Mykonos",
+            archaeologicalMuseum: "Musée Archéologique de Mykonos",
+            fabricaSquare: "Place Fabrica",
+            tholosTomb: "Tombe Tholos de Mykonos",
+            armenistisLighthouse: "Phare d'Armenistis",
+            neolithicSettlement: "Établissement Néolithique de Ftelia Mykonos",
+            agiaAnnaBeach: "Plage d'Agia Anna",
+            megaliAmmosBeach: "Plage de Megali Ammos",
+            mykonosAirport: "Aéroport de Mykonos",
+            syrosAirport: "Aéroport de Syros",
+            // FAQ Section
+            faqSectionTitle: "Questions Fréquemment Posées",
+            faqSectionSubtitle: "Trouvez des réponses aux questions courantes sur nos suites",
+            // Aries Suite FAQ
+            ariesFAQ: {
+                title: "Questions Fréquemment Posées pour la Suite ARIES",
+                questions: [
+                    {
+                        question: "Combien de personnes peuvent dormir dans la Suite ARIES ?",
+                        answer: "La Suite ARIES peut accueillir le nombre suivant de personnes :\n\n3 personnes"
+                    },
+                    {
+                        question: "Y a-t-il un balcon dans la Suite ARIES ?",
+                        answer: "Oui, cet hébergement propose des options avec balcon. Vous pouvez en savoir plus à ce sujet et sur d'autres équipements de la Suite ARIES sur cette page."
+                    },
+                    {
+                        question: "Y a-t-il une terrasse dans la Suite ARIES ?",
+                        answer: "Oui, cet hébergement propose des options avec terrasse. Vous pouvez en savoir plus à ce sujet et sur d'autres équipements de la Suite ARIES sur cette page."
+                    },
+                    {
+                        question: "Quels sont les horaires d'enregistrement et de départ pour la Suite ARIES ?",
+                        answer: "L'enregistrement à la Suite ARIES se fait à partir de 15h00 et le départ jusqu'à 12h00."
+                    },
+                    {
+                        question: "Combien de chambres y a-t-il dans la Suite ARIES ?",
+                        answer: "La Suite ARIES comprend le nombre suivant de chambres :\n\n2 chambres"
+                    },
+                    {
+                        question: "Combien coûte un séjour à la Suite ARIES ?",
+                        answer: "Les tarifs de la Suite ARIES peuvent varier en fonction de votre séjour (c'est-à-dire des dates que vous sélectionnez, de la politique de l'hôtel, etc.). Saisissez vos dates pour voir les tarifs."
+                    },
+                    {
+                        question: "À quelle distance se trouve la Suite ARIES du centre de Mykonos ?",
+                        answer: "La Suite ARIES se trouve à 100 m du centre de Mykonos."
+                    },
+                    {
+                        question: "À quelle distance se trouve la Suite ARIES de la plage ?",
+                        answer: "La plage la plus proche se trouve à seulement 200 m de la Suite ARIES."
+                    },
+                    {
+                        question: "La Suite ARIES est-elle populaire auprès des familles ?",
+                        answer: "Oui, la Suite ARIES est populaire auprès des clients qui réservent des séjours en famille."
+                    }
+                ]
+            },
+            // Venus Suite FAQ
+            venusFAQ: {
+                title: "Questions Fréquemment Posées pour la Suite VENUS",
+                questions: [
+                    {
+                        question: "Combien de personnes peuvent dormir dans la Suite VENUS ?",
+                        answer: "La Suite VENUS peut accueillir le nombre suivant de personnes :\n\n2 personnes"
+                    },
+                    {
+                        question: "Y a-t-il un balcon dans la Suite VENUS ?",
+                        answer: "Oui, cet hébergement propose des options avec balcon. Vous pouvez en savoir plus à ce sujet et sur d'autres équipements de la Suite VENUS sur cette page."
+                    },
+                    {
+                        question: "Quels sont les horaires d'enregistrement et de départ pour la Suite VENUS ?",
+                        answer: "L'enregistrement à la Suite VENUS se fait à partir de 15h00 et le départ jusqu'à 11h00."
+                    },
+                    {
+                        question: "Combien de chambres y a-t-il dans la Suite VENUS ?",
+                        answer: "La Suite VENUS comprend le nombre suivant de chambres :\n\n1 chambre"
+                    },
+                    {
+                        question: "Combien coûte un séjour à la Suite VENUS ?",
+                        answer: "Les tarifs de la Suite VENUS peuvent varier en fonction de votre séjour (c'est-à-dire des dates que vous sélectionnez, de la politique de l'hôtel, etc.). Saisissez vos dates pour voir les tarifs."
+                    },
+                    {
+                        question: "À quelle distance se trouve la Suite VENUS du centre de Mykonos ?",
+                        answer: "La Suite VENUS se trouve à 100 m du centre de Mykonos."
+                    },
+                    {
+                        question: "À quelle distance se trouve la Suite VENUS de la plage ?",
+                        answer: "La plage la plus proche se trouve à seulement 200 m de la Suite VENUS."
+                    },
+                    {
+                        question: "La Suite VENUS est-elle populaire auprès des familles ?",
+                        answer: "Oui, la Suite VENUS est populaire auprès des clients qui réservent des séjours en famille."
+                    }
+                ]
+            },
+        },
+        // Room Gallery
+        gallery: {
+            heading: "Trouvez Votre Suite Parfaite",
+            searchPlaceholder: "Rechercher des chambres...",
+            priceFilter: "Gamme de Prix:",
+            priceOptions: {
+                all: "Tous les Prix",
+                low: "Moins de 100€",
+                mid: "100€ - 150€",
+                high: "Plus de 150€"
+            },
+            resultsCount: (count) => `${count} chambre${count !== 1 ? 's' : ''} trouvée${count !== 1 ? 's' : ''}`,
+            viewButton: "Voir les Détails",
+            bookButton: "Réserver Maintenant",
+            noResults: {
+                title: "Aucune chambre trouvée",
+                subtitle: "Essayez d'ajuster vos critères de recherche"
+            },
+            rooms: [
+                {
+                    id: "aries-suite",
+                    title: "Suite Aries",
+                    description: "Suite élégante inspirée de la constellation du Bélier."
+                },
+                {
+                    id: "venus-suite",
+                    title: "Suite Vénus",
+                    description: "Suite luxueuse inspirée de la déesse de l'amour et de la beauté."
+                }
+            ],
+            amenityLabels: {
+                "Free Wi-Fi": "Wi-Fi Gratuit",
+                "Air Conditioning": "Climatisation",
+                "24/7 Reception": "Réception 24/7",
+                "Entire place to yourself": "Tout l'endroit à votre disposition",
+                "Private Bathroom": "Salle de Bain Privée",
+                "Balcony": "Balcon",
+                "WiFi": "WiFi",
+                "Kitchen": "Cuisine",
+                "City View": "Vue sur la Ville",
+                "Workspace": "Espace de Travail",
+                "Room Service": "Service en Chambre",
+                "Business Center": "Centre d'Affaires",
+                "Parking": "Parking",
+                "Gym Access": "Accès Gym",
+                "Swimming Pool": "Piscine",
+                "Breakfast": "Petit-déjeuner"
+            },
+            availabilityLabels: {
+                "Available": "Disponible",
+                "Booked": "Réservé",
+                "Unavailable": "Indisponible"
+            },
+            priceLabels: {
+                "night": "/nuit",
+                "per": "par",
+                "from": "à partir de"
+            }
+        },
+        // Amenity Labels
+        amenityLabels: {
+            "Free Wi-Fi": "Wi-Fi Gratuit",
+            "Air Conditioning": "Climatisation",
+            "24/7 Reception": "Réception 24/7",
+            "24-hour Front Desk": "Réception 24h/24",
+            "Entire place to yourself": "Tout l'endroit à votre disposition",
+            "Private Bathroom": "Salle de Bain Privée",
+            "Balcony": "Balcon",
+            "Terrace": "Terrasse",
+            "Bath or Shower": "Baignoire ou Douche",
+            "Daily Housekeeping": "Ménage Quotidien",
+            "WiFi": "WiFi",
+            "Kitchen": "Cuisine",
+            "City View": "Vue sur la Ville",
+            "Workspace": "Espace de Travail",
+            "Room Service": "Service en Chambre",
+            "Business Center": "Centre d'Affaires",
+            "Parking": "Parking",
+            "Gym Access": "Accès Gym",
+            "Swimming Pool": "Piscine",
+            "Breakfast": "Petit-déjeuner",
+            "42 m² size": "42 m² de superficie",
+            "32 m² size": "32 m² de superficie",
+            "Shower": "Douche",
+            "Bathtub": "Baignoire",
+            "Heating": "Chauffage",
+            "Private Entrance": "Entrée Privée",
+            "Soundproofing": "Insonorisation",
+            "Tile/Marble Floor": "Sol Carrelé/Marbre",
+            "Wooden/Parquet Floor": "Parquet/Sol en Bois",
+            "Socket near bed": "Prise près du lit",
+            "Clothes rack": "Portant à vêtements",
+            "Towels": "Serviettes",
+            "Bed linen": "Linge de lit",
+            "Wardrobe": "Armoire",
+            "Hair dryer": "Sèche-cheveux",
+            "Toilet paper": "Papier toilette",
+            "Free toiletries": "Articles de toilette gratuits",
+            "24-hour Front Desk": "Réception 24h/24"
+        },
+        // Availability Labels
+        availabilityLabels: {
+            "Available": "Disponible",
+            "Booked": "Réservé",
+            "Unavailable": "Indisponible"
+        },
+        // Price Labels
+        priceLabels: {
+            "night": "/nuit",
+            "per": "par",
+            "from": "à partir de"
+        },
+        // Footer
+        footer: {
+            brandName: "Les chambres de Nana sur Booking",
+            quickLinks: {
+                title: "Liens Rapides",
+                home: "Accueil",
+                rooms: "Chambres",
+                contact: "Contact"
+            },
+            contactInfo: {
+                title: "Informations de Contact",
+                email: "nanasroomspc@gmail.com",
+                phone: "+30 6955217820",
+                phone2: "+30 6947203554",
+                address: "Ville de Mykonos",
+                bookingAries: "Réserver la Suite Aries sur Booking.com",
+                bookingVenus: "Réserver Venus Suite sur Booking.com",
+                bookingAriesLink: "https://www.booking.com/hotel/gr/aries-suites.el.html?aid=356980&label=gog235jc-10CAsoXEIMYXJpZXMtc3VpdGVzSAlYA2hciAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuAKu0ejEBsACAdICJDY5NzA3NmVkLWQzZjctNDg3Mi1iZWViLWJmZGJlNzhlNTAyNtgCAeACAQ&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&",
+                bookingVenusLink: "https://www.booking.com/hotel/gr/nanas-mykonos.el.html?label=gen173nr-10CAsoXEINbmFuYXMtbXlrb25vc0gzWARoXIgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAagCAbgCtcXoxAbAAgHSAiQ5ZmFlMmZkYi0zY2E1LTRhYTktOGUxYi01NDNjM2IwNGUxNjXYAgHgAgE&sid=eb8ca3d796bd8e230f1f4275542e6e1a&dist=0&keep_landing=1&sb_price_type=total&type=total&"
+            },
+            copyright: "© 2025 Nana's Rooms. Tous droits réservés."
+        },
+        // Templates
+        templates: {
+            fieldLabels: {
+                firstName: "Prénom",
+                lastName: "Nom de famille",
+                email: "Email",
+                phone: "Téléphone"
+            }
+        }
+    }
+};
+
+// Language Provider Component
+
+export const LanguageProvider = ({ children }) => {
+    // Read from localStorage or default to 'en'
+    const getInitialLanguage = () => {
+        const stored = typeof window !== 'undefined' ? localStorage.getItem('language') : null;
+        return stored || 'en';
+    };
+    const [currentLanguage, setCurrentLanguage] = useState(getInitialLanguage);
+
+    const switchLanguage = (lang) => {
+        setCurrentLanguage(lang);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('language', lang);
+        }
+    };
+
+    const t = translations[currentLanguage];
+
+    return (
+        <LanguageContext.Provider value={{ currentLanguage, switchLanguage, t }}>
+            {children}
+        </LanguageContext.Provider>
+    );
+};
+
+// Custom hook to use language context
+export const useLanguage = () => {
+    const context = useContext(LanguageContext);
+    if (!context) {
+        throw new Error('useLanguage must be used within a LanguageProvider');
+    }
+    return context;
+};
+
+export default LanguageContext;

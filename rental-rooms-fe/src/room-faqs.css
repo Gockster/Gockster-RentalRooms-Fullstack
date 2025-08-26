@@ -1,0 +1,61 @@
+.room-faqs-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  padding: 32px 24px;
+}
+
+.room-faqs-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.room-faqs-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.room-faqs-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.room-faqs-grid {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
+.room-faqs-column {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .room-faqs-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .room-faqs-column {
+    width: 100%;
+    min-width: 0;
+  }
+  .room-faqs-container {
+    padding: 20px 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .room-faqs-title {
+    font-size: 1.3rem;
+  }
+  .room-faqs-container {
+    padding: 10px 2px;
+    border-radius: 8px;
+  }
+}

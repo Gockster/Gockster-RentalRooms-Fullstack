@@ -4,29 +4,30 @@ import "../styles/main.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { clearUser } from '../store/userSlice';
 import { useNavigate } from 'react-router-dom';
-import SignInModal from './SignInModal';
-import SignUpModal from './SignUpModal';
-import SignIn from './signin';
-import SignUp from './signup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AuthModal from './AuthModal';
+import AuthPromptModal from './AuthPromptModal';
 
 export default function Navbar() {
   const { currentLanguage, switchLanguage, t } = useLanguage();
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
-  const [showSignIn, setShowSignIn] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState('signin');
   const userFirstName = useSelector((state) => state.user.userFirstName);
   const userLastName = useSelector((state) => state.user.userLastName);
   const isSignedIn = !!useSelector((state) => state.user.token);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log('Navbar render - isSignedIn:', isSignedIn, 'userFirstName:', userFirstName, 'userLastName:', userLastName);
   const handleSignOut = () => {
-  dispatch(clearUser());
-  setShowUserDropdown(false);
-  navigate('/');
+    dispatch(clearUser());
+    setShowUserDropdown(false);
+    toast.info('Signed out successfully.', { position: 'top-center' });
+    navigate('/');
   };
 
   useEffect(() => {
@@ -220,9 +221,8 @@ export default function Navbar() {
               <span
                 className="nav-link"
                 style={{ fontWeight: 600, color: '#3498db', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}
-                onClick={() => setShowUserDropdown((prev) => !prev)}
+                onClick={() => setShowAuthPrompt(true)}
                 tabIndex={0}
-                onBlur={() => setTimeout(() => setShowUserDropdown(false), 150)}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 4 }}>
                   <circle cx="12" cy="8" r="4" />
@@ -230,70 +230,22 @@ export default function Navbar() {
                 </svg>
                 <span style={{ marginLeft: 6, fontSize: 14 }}>▼</span>
               </span>
-              {showUserDropdown && (
-                <div style={{
-                  position: 'absolute',
-                  top: '100%',
-                  right: 0,
-                  background: '#fff',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-                  borderRadius: 8,
-                  minWidth: 120,
-                  zIndex: 1001,
-                  padding: '8px 0',
-                }}>
-                  <button
-                    onClick={() => { setShowSignIn(true); setShowUserDropdown(false); }}
-                    style={{
-                      display: 'block',
-                      width: '100%',
-                      color: '#3498db',
-                      fontWeight: 500,
-                      fontSize: 16,
-                      padding: '8px 16px',
-                      background: 'none',
-                      border: 'none',
-                      textAlign: 'left',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Sign In
-                  </button>
-                  <button
-                    onClick={() => { setShowSignUp(true); setShowUserDropdown(false); }}
-                    style={{
-                      display: 'block',
-                      width: '100%',
-                      color: '#27ae60',
-                      fontWeight: 500,
-                      fontSize: 16,
-                      padding: '8px 16px',
-                      background: 'none',
-                      border: 'none',
-                      textAlign: 'left',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Sign Up
-                  </button>
-                </div>
-
-              )}
             </li>
           )}
         </ul>
       </div>
 
-      {/* Modals for Sign In and Sign Up */}
-      {showSignIn && (
-        <SignInModal onClose={() => setShowSignIn(false)}>
-          <SignIn onSuccess={() => setShowSignIn(false)} />
-        </SignInModal>
+      {/* Auth Prompt Modal (initial small modal) */}
+      {showAuthPrompt && (
+        <AuthPromptModal
+          onClose={() => setShowAuthPrompt(false)}
+          onSignIn={() => { setShowAuthPrompt(false); setAuthMode('signin'); setShowAuthModal(true); }}
+          onSignUp={() => { setShowAuthPrompt(false); setAuthMode('signup'); setShowAuthModal(true); }}
+        />
       )}
-      {showSignUp && (
-        <SignUpModal onClose={() => setShowSignUp(false)}>
-          <SignUp onSuccess={() => { setShowSignUp(false); setShowSignIn(false); }} />
-        </SignUpModal>
+      {/* Auth Modal for Sign In/Sign Up */}
+      {showAuthModal && (
+        <AuthModal onClose={() => setShowAuthModal(false)} initialMode={authMode} />
       )}
 
       {/* Mobile Responsive Styles */}
@@ -371,7 +323,8 @@ export default function Navbar() {
           }
         }
       `}</style>
-    </nav>
+  <ToastContainer />
+  </nav>
 
   );
 }

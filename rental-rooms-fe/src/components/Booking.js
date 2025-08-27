@@ -49,7 +49,10 @@ const Booking = ({ roomId, userId, onBooked }) => {
         {/* Top horizontal booking bar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 0, border: '1.5px solid #f5c242', borderRadius: 8, overflow: 'hidden', background: '#f8f9fa', padding: 0 }}>
           <div style={{ flex: 2, borderRight: '1.5px solid #f5c242', padding: '18px 18px 18px 24px', display: 'flex', flexDirection: 'column' }}>
-            <label style={{ fontWeight: 500, marginBottom: 4 }}>Check-in</label>
+            <label style={{ fontWeight: 500, marginBottom: 4 }}>
+              Άφιξη<br />
+              <span style={{ color: '#00b894', fontSize: 13, fontWeight: 500 }}>Check-in</span>
+            </label>
             <DatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
@@ -58,12 +61,15 @@ const Booking = ({ roomId, userId, onBooked }) => {
               endDate={endDate}
               minDate={new Date()}
               dateFormat="dd MMM yyyy"
-              placeholderText="Check-in"
+              placeholderText="Άφιξη / Check-in"
               style={{ width: '100%' }}
             />
           </div>
           <div style={{ flex: 2, borderRight: '1.5px solid #f5c242', padding: '18px', display: 'flex', flexDirection: 'column' }}>
-            <label style={{ fontWeight: 500, marginBottom: 4 }}>Check-out</label>
+            <label style={{ fontWeight: 500, marginBottom: 4 }}>
+              Αναχώρηση<br />
+              <span style={{ color: '#00b894', fontSize: 13, fontWeight: 500 }}>Check-out</span>
+            </label>
             <DatePicker
               selected={endDate}
               onChange={date => setEndDate(date)}
@@ -72,30 +78,33 @@ const Booking = ({ roomId, userId, onBooked }) => {
               endDate={endDate}
               minDate={startDate || new Date()}
               dateFormat="dd MMM yyyy"
-              placeholderText="Check-out"
+              placeholderText="Αναχώρηση / Check-out"
               style={{ width: '100%' }}
             />
           </div>
           <div style={{ flex: 3, borderRight: '1.5px solid #f5c242', padding: '18px', display: 'flex', flexDirection: 'column', minWidth: 220 }}>
-            <label style={{ fontWeight: 500, marginBottom: 4 }}>Guests</label>
+            <label style={{ fontWeight: 500, marginBottom: 4 }}>
+              Επισκέπτες<br />
+              <span style={{ color: '#00b894', fontSize: 13, fontWeight: 500 }}>Guests</span>
+            </label>
             <div style={{ display: 'flex', gap: 12 }}>
               <select value={adults} onChange={e => setAdults(Number(e.target.value))} style={{ padding: 6, borderRadius: 6, border: '1px solid #ccc', minWidth: 60 }}>
-                {[1,2,3,4,5].map(n => <option key={n} value={n}>{n} adult{n>1?'s':''}</option>)}
+                {[1,2,3,4,5].map(n => <option key={n} value={n}>{n} ενήλικας{n>1?'ες':''} / {n} adult{n>1?'s':''}</option>)}
               </select>
               <select value={children} onChange={e => setChildren(Number(e.target.value))} style={{ padding: 6, borderRadius: 6, border: '1px solid #ccc', minWidth: 60 }}>
-                {[0,1,2,3,4].map(n => <option key={n} value={n}>{n} child{n!==1?'ren':''}</option>)}
+                {[0,1,2,3,4].map(n => <option key={n} value={n}>{n} παιδί{n!==1?'ά':''} / {n} child{n!==1?'ren':''}</option>)}
               </select>
             </div>
           </div>
           <div style={{ flex: 1, padding: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <button type="submit" disabled={loading} style={{ width: '100%', padding: '12px 0', borderRadius: 8, background: '#0071c2', color: '#fff', border: 'none', fontWeight: 'bold', fontSize: 16, cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-              {loading ? 'Booking...' : 'Εφαρμογή αλλαγών'}
+              {loading ? 'Κράτηση... / Booking...' : 'Κράτηση / Book'}
             </button>
           </div>
         </div>
         {/* Error/success messages */}
-        {error && <div style={{ color: 'red', margin: '8px 0 0 16px' }}>{error}</div>}
-        {success && <div style={{ color: 'green', margin: '8px 0 0 16px' }}>{success}</div>}
+  {error && <div style={{ color: 'red', margin: '8px 0 0 16px' }}>{error} <span style={{ color: '#00b894', fontSize: 13, fontWeight: 500 }}>/ Σφάλμα</span></div>}
+  {success && <div style={{ color: 'green', margin: '8px 0 0 16px' }}>{success} <span style={{ color: '#00b894', fontSize: 13, fontWeight: 500 }}>/ Επιτυχία</span></div>}
       </form>
   {/* Summary row removed as requested */}
     </div>

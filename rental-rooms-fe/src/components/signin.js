@@ -30,7 +30,7 @@ const SignIn = ({ onSuccess }) => {
                 password: form.password
             });
             if (response.data && response.data.token) {
-                console.log('Sign in response data:', response.data);
+               
                 // Store user info in Redux
                 dispatch(setUser({
                     userId: response.data.userId || response.data.id,

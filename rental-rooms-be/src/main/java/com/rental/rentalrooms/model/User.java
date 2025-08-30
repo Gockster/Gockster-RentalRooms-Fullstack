@@ -13,9 +13,9 @@ public class User {
 
     private String password;
 
-    private String userFirstName;
+    private String firstName;
 
-    private String userLastName;
+    private String lastName;
 
     private String email;
 
@@ -28,5 +28,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+
 
 }

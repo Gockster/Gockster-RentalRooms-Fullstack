@@ -43,11 +43,11 @@ public class AuthService {
         Map<String, Object> response = new HashMap<>();
         response.put("token", token);
         response.put("email", existingUser.getEmail());
-        response.put("userFirstName", existingUser.getUserFirstName());
-        response.put("userLastName", existingUser.getUserLastName());
+        response.put("firstName", existingUser.getFirstName());
+        response.put("lastName", existingUser.getLastName());
         response.put("phoneNumber", existingUser.getPhoneNumber());
         response.put("roles", existingUser.getRoles());
-        response.put("id", existingUser.getId());
+        response.put("userId", existingUser.getId());
         return ResponseEntity.ok(response);
     }
 }

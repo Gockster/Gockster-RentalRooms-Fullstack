@@ -50,6 +50,7 @@ public class BookingMapperImpl implements BookingMapper {
     public BookingResponseDTO entityToResponseDTO(Booking booking) {
         if (booking == null) return null;
         BookingResponseDTO dto = new BookingResponseDTO();
+        dto.setId(booking.getId());
         if (booking.getUser() != null) {
             dto.setFirstName(booking.getUser().getFirstName());
             dto.setLastName(booking.getUser().getLastName());
